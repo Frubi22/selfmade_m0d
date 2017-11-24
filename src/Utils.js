@@ -106,24 +106,23 @@ export default class Utils
 
             $(element).click(function(e)
             {
-                if(e.button == 0)
+                let location = $(this).attr("data-href");
+                if(location != "")
                 {
-                    let location = $(this).attr("data-href");
-                    if(location != "")
+                    Settings.settings.isActive = false;
+                    Utils.pr0gramm.navigateTo(location,0);
+                    setTimeout(function()
                     {
-                        Settings.settings.isActive = false;
-                        Utils.pr0gramm.navigateTo(location,0);
-                        setTimeout(function()
-                        {
-                            Settings.settings.isActive = true;
-                        },10); 
-                    }
-                    removeNotification(this);
+                        Settings.settings.isActive = true;
+                    },10); 
                 }
-                else if(e.button == 2)
-                {
-                    removeNotification(this);
-                }
+                removeNotification(this);
+            });
+
+            $(element).contextmenu(function()
+            {
+                removeNotification(this);
+                return false;
             });
         
             setTimeout(function()

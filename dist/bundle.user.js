@@ -4,8 +4,9 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.2pre2
+// @version		0.7.2pre3
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
+// @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
@@ -187,24 +188,23 @@ class Utils
 
             $(element).click(function(e)
             {
-                if(e.button == 0)
+                let location = $(this).attr("data-href");
+                if(location != "")
                 {
-                    let location = $(this).attr("data-href");
-                    if(location != "")
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
+                    Utils.pr0gramm.navigateTo(location,0);
+                    setTimeout(function()
                     {
-                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
-                        Utils.pr0gramm.navigateTo(location,0);
-                        setTimeout(function()
-                        {
-                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
-                        },10); 
-                    }
-                    removeNotification(this);
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
+                    },10); 
                 }
-                else if(e.button == 2)
-                {
-                    removeNotification(this);
-                }
+                removeNotification(this);
+            });
+
+            $(element).contextmenu(function()
+            {
+                removeNotification(this);
+                return false;
             });
         
             setTimeout(function()
