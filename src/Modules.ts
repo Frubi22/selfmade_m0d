@@ -1,12 +1,17 @@
 import Settings from "./Settings";
 import Utils from "./Utils";
 
+declare let p:any;
 export default class Modules
 {
+    private pr0gramm = p;
     constructor()
     {
         let _this = this;
-        window.addEventListener("commentsReady", function(){_this.executeModules()});
+        window.addEventListener("commentsReady", function()
+        {
+            setTimeout(function(){_this.executeModules(); },10);     
+        });
     }
 
     private executeModules():void
@@ -55,6 +60,7 @@ export default class Modules
 
     private skipUploadByTag():boolean
     {
+        let _this = this;
         let tags = Utils.getTags();
         for(let i = 0; i < tags.length; i++)
         {
@@ -64,7 +70,7 @@ export default class Modules
                 {
                     Utils.rateUpload();
                 }
-                Utils.showNotification("Skipped because of Tag: " + tags[i]);
+                Utils.showNotification("Skipped because of Tag: " + tags[i], this.pr0gramm.location);
                 Utils.nextUpload();
                 return true;
             }
@@ -80,7 +86,7 @@ export default class Modules
             if(Settings.settings.autoRateSkippedUploads)
                 Utils.rateUpload();
     
-            Utils.showNotification("Skipped because of User: " + user);
+            Utils.showNotification("Skipped because of User: " + user, this.pr0gramm.location);
             Utils.nextUpload();
             return true;
         }  
@@ -99,7 +105,7 @@ export default class Modules
                         Utils.rateUpload();
                     }
                     Utils.nextUpload();
-                    Utils.showNotification("Skipped because of Benis: " + score);
+                    Utils.showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
                     return true;
                 }
         }
@@ -118,7 +124,7 @@ export default class Modules
                     Utils.rateUpload();
                 }
                 Utils.nextUpload();
-                Utils.showNotification("Skipped because of average Benis: " + score);
+                Utils.showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
                 return true;
             }
         }
@@ -135,7 +141,7 @@ export default class Modules
                     Utils.rateUpload();
                 }
                 Utils.nextUpload();
-                Utils.showNotification("Skipped because of Userrank: " + rank);
+                Utils.showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
                 return true;
         }
         return false;

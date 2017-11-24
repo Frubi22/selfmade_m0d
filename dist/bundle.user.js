@@ -372,8 +372,15 @@ class Utils {
                 if (location != "") {
                     Settings_1.default.settings.isActive = false;
                     Utils.pr0gramm.navigateTo(location, 0);
-                    Settings_1.default.settings.isActive = true;
+                    setTimeout(function () {
+                        Settings_1.default.settings.isActive = true;
+                    }, 10);
                 }
+                $(this).animate({
+                    left: "-300px"
+                }, function () {
+                    this.remove();
+                });
             });
             setTimeout(function () {
                 $(element).animate({
@@ -482,9 +489,7 @@ class Utils {
     }
     static nextUpload() {
         if (Settings_1.default.settings.nextUploadDirection == 1) {
-            setTimeout(function () {
-                $(".stream-prev").click();
-            }, 10);
+            $(".stream-prev").click();
         }
         else if (Settings_1.default.settings.nextUploadDirection == -1) {
             setTimeout(function () {
@@ -688,8 +693,11 @@ const Settings_1 = __webpack_require__(0);
 const Utils_1 = __webpack_require__(1);
 class Modules {
     constructor() {
+        this.pr0gramm = p;
         let _this = this;
-        window.addEventListener("commentsReady", function () { _this.executeModules(); });
+        window.addEventListener("commentsReady", function () {
+            setTimeout(function () { _this.executeModules(); }, 10);
+        });
     }
     executeModules() {
         let _this = this;
@@ -725,13 +733,14 @@ class Modules {
         }
     }
     skipUploadByTag() {
+        let _this = this;
         let tags = Utils_1.default.getTags();
         for (let i = 0; i < tags.length; i++) {
             if (Settings_1.default.settings.blockedTags.includes(tags[i].toLowerCase())) {
                 if (Settings_1.default.settings.autoRateSkippedUploads) {
                     Utils_1.default.rateUpload();
                 }
-                Utils_1.default.showNotification("Skipped because of Tag: " + tags[i]);
+                Utils_1.default.showNotification("Skipped because of Tag: " + tags[i], this.pr0gramm.location);
                 Utils_1.default.nextUpload();
                 return true;
             }
@@ -743,7 +752,7 @@ class Modules {
         if (Settings_1.default.settings.blockedUsers.includes(user)) {
             if (Settings_1.default.settings.autoRateSkippedUploads)
                 Utils_1.default.rateUpload();
-            Utils_1.default.showNotification("Skipped because of User: " + user);
+            Utils_1.default.showNotification("Skipped because of User: " + user, this.pr0gramm.location);
             Utils_1.default.nextUpload();
             return true;
         }
@@ -757,7 +766,7 @@ class Modules {
                     Utils_1.default.rateUpload();
                 }
                 Utils_1.default.nextUpload();
-                Utils_1.default.showNotification("Skipped because of Benis: " + score);
+                Utils_1.default.showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
                 return true;
             }
         }
@@ -771,7 +780,7 @@ class Modules {
                     Utils_1.default.rateUpload();
                 }
                 Utils_1.default.nextUpload();
-                Utils_1.default.showNotification("Skipped because of average Benis: " + score);
+                Utils_1.default.showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
                 return true;
             }
         }
@@ -784,7 +793,7 @@ class Modules {
                 Utils_1.default.rateUpload();
             }
             Utils_1.default.nextUpload();
-            Utils_1.default.showNotification("Skipped because of Userrank: " + rank);
+            Utils_1.default.showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
             return true;
         }
         return false;
@@ -882,21 +891,22 @@ class Keypress {
     constructor() {
         this.pr0gramm = p;
         let _this = this;
-        window.addEventListener("keypress", function (e) { _this.manageKeypress(e); });
+        window.addEventListener("keypress", function (e) { _this.shortcuts(e); });
     }
-    manageKeypress(e) {
-        console.log($(e.path)[0].nodeName);
+    shortcuts(e) {
         if ($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT") {
             if (e.key == "e") {
                 this.pr0gramm.navigateTo("settings/site", 0);
             }
-            if (e.key == "n") {
+            else if (e.key == "n") {
                 this.pr0gramm.navigateTo("inbox/all", 0);
             }
-            if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
-                if (Settings_1.default.settings.skipUploadAfterRate) {
-                    Utils_1.default.nextUpload();
-                    Utils_1.default.showNotification("Skipped because of: User ranked");
+            else if ($(".item-vote").length > 0) {
+                if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
+                    if (Settings_1.default.settings.skipUploadAfterRate) {
+                        Utils_1.default.nextUpload();
+                        Utils_1.default.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
+                    }
                 }
             }
         }

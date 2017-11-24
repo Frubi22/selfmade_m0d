@@ -8,30 +8,34 @@ export default class Keypress
     constructor()
     {
         let _this = this;
-        window.addEventListener("keypress", function(e){_this.manageKeypress(e);})
+        window.addEventListener("keypress", function(e){_this.shortcuts(e);})
     }
 
-    private manageKeypress(e:any):void
+    private shortcuts(e:any):void
     {
-        console.log($(e.path)[0].nodeName);
         if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
         {
             if(e.key == "e")
             {
                 this.pr0gramm.navigateTo("settings/site",0);
             }
-            if(e.key == "n")
+            else if(e.key == "n")
             {
                 this.pr0gramm.navigateTo("inbox/all",0);
             }
-            if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
+
+            else if($(".item-vote").length > 0)
             {
-                if(Settings.settings.skipUploadAfterRate)
+                if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
                 {
-                    Utils.nextUpload();
-                    Utils.showNotification("Skipped because of: User ranked");
+                    if(Settings.settings.skipUploadAfterRate)
+                    {
+                        Utils.nextUpload();
+                        Utils.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
+                    }
                 }
             }
+            
         }
     }
 }

@@ -115,8 +115,19 @@ export default class Utils
                 {
                     Settings.settings.isActive = false;
                     Utils.pr0gramm.navigateTo(location,0);
-                    Settings.settings.isActive = true;
+                    setTimeout(function()
+                    {
+                        Settings.settings.isActive = true;
+                    },10);
+                   
                 }
+                $(this).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    this.remove()
+                });
             });
         
             setTimeout(function()
@@ -260,16 +271,11 @@ export default class Utils
         }
     }
 
-    
-
     public static nextUpload():void
     {
         if(Settings.settings.nextUploadDirection == 1)
         {
-            setTimeout(function()
-            {
-                $(".stream-prev").click();
-            },10);
+            $(".stream-prev").click();
         }
         else if(Settings.settings.nextUploadDirection == -1)
         {
