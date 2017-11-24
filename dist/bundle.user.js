@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.2pre5
+// @version		0.7.2pre6
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
@@ -198,30 +198,38 @@ class Utils
                         __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
                     },10); 
                 }
-                this.removeNotification(this);
+                $(this).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    this.remove()
+                });
             });
 
             $(element).contextmenu(function()
             {
-                this.removeNotification(this);
+                $(this).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    this.remove()
+                });
                 return false;
             });
         
             setTimeout(function()
             {
-                this.removeNotification(element);
+                $(element).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    element.remove()
+                });
             },__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.notificationDuration*1000);
         }
-    }
-    removeNotification(element)
-    {
-        $(element).animate(
-            {
-                left: "-300px"
-            },function()
-            {
-                element.remove()
-            });
     }
 
     addBlockTagSign()

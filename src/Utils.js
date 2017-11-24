@@ -116,30 +116,38 @@ export default class Utils
                         Settings.settings.isActive = true;
                     },10); 
                 }
-                this.removeNotification(this);
+                $(this).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    this.remove()
+                });
             });
 
             $(element).contextmenu(function()
             {
-                this.removeNotification(this);
+                $(this).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    this.remove()
+                });
                 return false;
             });
         
             setTimeout(function()
             {
-                this.removeNotification(element);
+                $(element).animate(
+                {
+                    left: "-300px"
+                },function()
+                {
+                    element.remove()
+                });
             },Settings.settings.notificationDuration*1000);
         }
-    }
-    removeNotification(element)
-    {
-        $(element).animate(
-            {
-                left: "-300px"
-            },function()
-            {
-                element.remove()
-            });
     }
 
     addBlockTagSign()
