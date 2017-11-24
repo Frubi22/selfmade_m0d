@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.2pre
+// @version		0.7.2pre1
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
 // ==/UserScript==
@@ -78,320 +78,9 @@
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(1);
 
-
-let settingsPageContent = __webpack_require__(4);
-
-class Settings 
-{
-    constructor()
-    { 
-        this.defaultSettings =
-        {
-            isActive : true,
-            skipUploadByTag : false,
-            blockedTags : [],
-            onlyGoodTags : true,
-            amountOfTagsChecked: -1,
-            skipUploadByUser : false,
-            blockedUsers : [],
-            skipUploadByTotalBenis : false,
-            minBenis : 0,
-            skipUploadByAverageBenis : false,
-            minAverageBenis : 0,
-            skipUploadByUserRank : false,
-            blockedUserRanks : [],
-            nextUploadDirection : -1,
-            autoRateSkippedUploads : false,
-            blockCommentsByUser : false,
-            commentBlacklist: [],
-            blockCommentsByBlacklist: false,
-            blockCommentsByBenis: false,
-            commentMinBenis: 0,
-            activateNotifications: true,
-            notificationColor: "#ee4d2e",
-            notificationDuration: 3.0,
-            collapseTooLongComments: true,
-            skipUploadAfterRate: false
-        }
-        this.pr0gramm = p;
-        let _this = this
-        Settings.settings = Object.assign({},this.defaultSettings);
-        this.readSettings();  
-        window.addEventListener("settingsReady", function(){_this.addSettingsTab()});
-        if(window.location.href.includes("Selfmade_M0d")){this.pr0gramm.navigateTo("settings/site",0);}
-    } 
- 
-
-    
-
-    readSettings()
-    {
-        let tmp = JSON.parse(localStorage.getItem("Selfmade_M0d_Settings"));
-        if(tmp != null)
-        {
-            Object.keys(tmp).forEach(function(e)
-            {
-                if(Settings.settings[e] != undefined)
-                    Settings.settings[e] = tmp[e];  
-            });
-        }
-        $("#notificationbox").css("background",Settings.settings.notificationColor);
-        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
-        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
-        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
-        var yiq = ((r*299)+(g*587)+(b*114))/1000;
-        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
-    }
-
-    static quickSave()
-    {
-        localStorage.setItem("Selfmade_M0d_Settings", JSON.stringify(Settings.settings));
-    }
-
-    addSettingsTab()
-    {
-        let _this = this
-        let tmp = $(".selfmade_M0d");
-        if(tmp.length != 0)
-        {
-            return;
-        }
-        let button = document.createElement("a");
-        button.innerText = "Selfmade M0d";
-        button.className = "selfmade_m0d";
-        button.href = "/settings/Selfmade_M0d";
-        $(button).click(function(e)
-        {
-            e.preventDefault();
-            window.history.pushState({},"Selfmade M0d Settings","/settings/Selfmade_M0d");
-            _this.createSettings();
-        });
-        $(".tab-bar")[0].appendChild(button); 
-    }
-
-    createSettings()
-    {
-        let _this = this;
-        $(".pane.form-page").empty(); 
-        $(".active").toggleClass("active");
-        $(".selfmade_m0d").addClass("active");
-        
-        $(".pane.form-page")[0].innerHTML = settingsPageContent;
-    
-        //#region Blocked Tags
-        Settings.settings.blockedTags.forEach(function(e)
-        {
-            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bt input")[0], e);
-        });
-    
-        $("#bt input:first").keyup(function(e){
-            if(e.key == ",")
-            {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
-                {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
-            }
-        });
-    
-        $("#bt input")[1].checked = Settings.settings.onlyGoodTags;
-        $("#bt input")[2].value = Settings.settings.amountOfTagsChecked;
-        //#endregion
-
-        //#region Blocked Users
-        Settings.settings.blockedUsers.forEach(function(e)
-        {
-            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bu input")[0], e);
-        });
-    
-        $("#bu input:first").keyup(function(e){
-            if(e.key == ",")
-            {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
-                {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
-            }
-        });
-        $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
-        //#endregion
-
-        //#region Comments
-        Settings.settings.commentBlacklist.forEach(function(e)
-        {
-            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bc input")[0], e);
-        });
-    
-        $("#bc input:first").keyup(function(e){
-            if(e.key == "," || e.key == " ")
-            {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
-                {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
-            }
-        });
-        $("#bc input")[1].checked = Settings.settings.blockCommentsByBenis;
-        $("#bc input")[2].value = Settings.settings.commentMinBenis;
-        $("#bc input")[3].checked = Settings.settings.collapseTooLongComments;
-        //#endregion
-
-        //#region Blocked Usersranks
-        Settings.settings.blockedUserRanks.forEach(function(e)
-        {
-            let tmp = $("label:contains(" + e + ")");
-            if(tmp.length != 0)
-            $("label:contains(" + e + ")").prev()[0].checked = true;
-        });
-        //#endregion
-
-        //#region minBenis
-        $("#mb input")[0].checked = Settings.settings.skipUploadByTotalBenis;
-        $("#mb input")[1].value = Settings.settings.minBenis;
-        $("#mb input")[2].checked = Settings.settings.skipUploadByAverageBenis;
-        $("#mb input")[3].value = Settings.settings.minAverageBenis;
-        //#endregion
-
-        //#region Skip
-        $("#sr input")[0].checked = Settings.settings.nextUploadDirection==-1?true:false;
-        $("#sr input")[1].checked = Settings.settings.skipUploadAfterRate;
-        //#endregion
-
-        //#region Notification
-        $("#nf input")[0].checked = Settings.settings.activateNotifications;
-        $("#nf input")[1].value = Settings.settings.notificationColor;
-        $("#nf input")[2].value = Settings.settings.notificationDuration;
-        //#endregion
-
-        $("#save input").click(function()
-        { 
-            _this.saveSettings();
-            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen gespeichert");
-        });
-        $("#reset a").click(function()
-        {
-            localStorage.removeItem("Selfmade_M0d_Settings");
-            Settings.settings = Object.assign({},_this.defaultSettings);
-            $("a.selfmade_m0d").click();
-            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen zurückgesetzt");
-        });
-    
-        $(".box-from-label").next().each(function()
-        {
-            $(this).click(function()
-            {
-                $(this).prev()[0].checked = !$(this).prev()[0].checked;
-            });
-        });
-    }
-
-    saveSettings()
-    {
-        //#region Blocked Tags
-        Settings.settings.blockedTags = [];
-        $("#bt input").prev().find("span").each(function()
-        {
-            let text = this.innerText.slice(0,this.innerText.length-3);
-            Settings.settings.blockedTags.push(text.toLowerCase());
-        });
-
-        Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length >0?true:false;
-        Settings.settings.onlyGoodTags = $("#bt input")[1].checked;
-        Settings.settings.amountOfTagsChecked = Number($("#bt input")[2].value);
-        //#endregion
-
-        //#region Blocked Users
-        Settings.settings.blockedUsers = [];
-        $("#bu input:first").prev().find("span").each(function()
-        {
-            let text = this.innerText.slice(0,this.innerText.length-3);
-            Settings.settings.blockedUsers.push(text.toLowerCase());
-        });
-
-        Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
-        Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
-        //#endregion
-
-        //#region Comments
-        Settings.settings.commentBlacklist = [];
-        $("#bc input:first").prev().find("span").each(function()
-        {
-            let text = this.innerText.slice(0,this.innerText.length-3);
-            Settings.settings.commentBlacklist.push(text.toLowerCase());
-        });
-        Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length >0 ? true:false;
-        Settings.settings.blockCommentsByBenis = $("#bc input")[1].checked;
-        Settings.settings.commentMinBenis = Number($("#bc input")[2].value);
-        Settings.settings.collapseTooLongComments = $("#bc input")[3].checked;
-        //#endregion
-
-        //#region Blocked Userranks
-        Settings.settings.blockedUserRanks = [];
-        let tmp = $("#br input:checked").next();
-        for(let i = 0; i < tmp.length; i++)
-        {
-            Settings.settings.blockedUserRanks.push(tmp[i].innerText.trim());
-        }
-        Settings.settings.skipUploadByUserRank = Settings.settings.blockedUserRanks.length >0 ? true:false;
-        //#endregion
-
-        //#region min Benis
-        Settings.settings.skipUploadByTotalBenis = $("#mb input")[0].checked;
-        Settings.settings.minBenis = Number($("#mb input")[1].value);
-        Settings.settings.skipUploadByAverageBenis = $("#mb input")[2].checked;
-        Settings.settings.minAverageBenis = Number($("#mb input")[3].value);
-        //#endregion
-
-        //#region Skip
-        Settings.settings.nextUploadDirection = $("#sr input")[0].checked ? -1:1;
-        Settings.settings.skipUploadAfterRate = $("#sr input")[1].checked;
-        //#endregion
-        
-        //#region Others
-        Settings.settings.autoRateSkippedUploads = false;
-        //#endregion
-
-        //#region Notification
-        Settings.settings.activateNotifications = $("#nf input")[0].checked;
-        Settings.settings.notificationColor = $("#nf input")[1].value;
-        Settings.settings.notificationDuration = Number($("#nf input")[2].value);
-        $("#notificationbox").css("background",Settings.settings.notificationColor);
-
-        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
-        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
-        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
-        var yiq = ((r*299)+(g*587)+(b*114))/1000;
-        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
-        //#endregion
- 
-        Settings.quickSave();
-    }
-}
-/* harmony export (immutable) */ __webpack_exports__["a"] = Settings;
-
-
-Settings.settings = {};
-
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(0);
-
-let filterHTML = __webpack_require__(3);
+let filterHTML = __webpack_require__(5);
 
 class Utils
 {
@@ -798,14 +487,325 @@ class Utils
 Utils.pr0gramm = p;
 
 /***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(0);
+
+
+let settingsPageContent = __webpack_require__(4);
+
+class Settings 
+{
+    constructor()
+    { 
+        this.defaultSettings =
+        {
+            isActive : true,
+            skipUploadByTag : false,
+            blockedTags : [],
+            onlyGoodTags : true,
+            amountOfTagsChecked: -1,
+            skipUploadByUser : false,
+            blockedUsers : [],
+            skipUploadByTotalBenis : false,
+            minBenis : 0,
+            skipUploadByAverageBenis : false,
+            minAverageBenis : 0,
+            skipUploadByUserRank : false,
+            blockedUserRanks : [],
+            nextUploadDirection : -1,
+            autoRateSkippedUploads : false,
+            blockCommentsByUser : false,
+            commentBlacklist: [],
+            blockCommentsByBlacklist: false,
+            blockCommentsByBenis: false,
+            commentMinBenis: 0,
+            activateNotifications: true,
+            notificationColor: "#ee4d2e",
+            notificationDuration: 3.0,
+            collapseTooLongComments: true,
+            skipUploadAfterRate: false
+        }
+        this.pr0gramm = p;
+        let _this = this
+        Settings.settings = Object.assign({},this.defaultSettings);
+        this.readSettings();  
+        window.addEventListener("settingsReady", function(){_this.addSettingsTab()});
+        if(window.location.href.includes("Selfmade_M0d")){this.pr0gramm.navigateTo("settings/site",0);}
+    } 
+ 
+
+    
+
+    readSettings()
+    {
+        let tmp = JSON.parse(localStorage.getItem("Selfmade_M0d_Settings"));
+        if(tmp != null)
+        {
+            Object.keys(tmp).forEach(function(e)
+            {
+                if(Settings.settings[e] != undefined)
+                    Settings.settings[e] = tmp[e];  
+            });
+        }
+        $("#notificationbox").css("background",Settings.settings.notificationColor);
+        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
+        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
+        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
+        var yiq = ((r*299)+(g*587)+(b*114))/1000;
+        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
+    }
+
+    static quickSave()
+    {
+        localStorage.setItem("Selfmade_M0d_Settings", JSON.stringify(Settings.settings));
+    }
+
+    addSettingsTab()
+    {
+        let _this = this
+        let tmp = $(".selfmade_M0d");
+        if(tmp.length != 0)
+        {
+            return;
+        }
+        let button = document.createElement("a");
+        button.innerText = "Selfmade M0d";
+        button.className = "selfmade_m0d";
+        button.href = "/settings/Selfmade_M0d";
+        $(button).click(function(e)
+        {
+            e.preventDefault();
+            window.history.pushState({},"Selfmade M0d Settings","/settings/Selfmade_M0d");
+            _this.createSettings();
+        });
+        $(".tab-bar")[0].appendChild(button); 
+    }
+
+    createSettings()
+    {
+        let _this = this;
+        $(".pane.form-page").empty(); 
+        $(".active").toggleClass("active");
+        $(".selfmade_m0d").addClass("active");
+        
+        $(".pane.form-page")[0].innerHTML = settingsPageContent;
+    
+        //#region Blocked Tags
+        Settings.settings.blockedTags.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bt input")[0], e);
+        });
+    
+        $("#bt input:first").keyup(function(e){
+            if(e.key == ",")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
+                    this.value = text;
+                    return;
+                }
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+            }
+        });
+    
+        $("#bt input")[1].checked = Settings.settings.onlyGoodTags;
+        $("#bt input")[2].value = Settings.settings.amountOfTagsChecked;
+        //#endregion
+
+        //#region Blocked Users
+        Settings.settings.blockedUsers.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bu input")[0], e);
+        });
+    
+        $("#bu input:first").keyup(function(e){
+            if(e.key == ",")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
+                    this.value = text;
+                    return;
+                }
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+            }
+        });
+        $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
+        //#endregion
+
+        //#region Comments
+        Settings.settings.commentBlacklist.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bc input")[0], e);
+        });
+    
+        $("#bc input:first").keyup(function(e){
+            if(e.key == "," || e.key == " ")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
+                    this.value = text;
+                    return;
+                }
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+            }
+        });
+        $("#bc input")[1].checked = Settings.settings.blockCommentsByBenis;
+        $("#bc input")[2].value = Settings.settings.commentMinBenis;
+        $("#bc input")[3].checked = Settings.settings.collapseTooLongComments;
+        //#endregion
+
+        //#region Blocked Usersranks
+        Settings.settings.blockedUserRanks.forEach(function(e)
+        {
+            let tmp = $("label:contains(" + e + ")");
+            if(tmp.length != 0)
+            $("label:contains(" + e + ")").prev()[0].checked = true;
+        });
+        //#endregion
+
+        //#region minBenis
+        $("#mb input")[0].checked = Settings.settings.skipUploadByTotalBenis;
+        $("#mb input")[1].value = Settings.settings.minBenis;
+        $("#mb input")[2].checked = Settings.settings.skipUploadByAverageBenis;
+        $("#mb input")[3].value = Settings.settings.minAverageBenis;
+        //#endregion
+
+        //#region Skip
+        $("#sr input")[0].checked = Settings.settings.nextUploadDirection==-1?true:false;
+        $("#sr input")[1].checked = Settings.settings.skipUploadAfterRate;
+        //#endregion
+
+        //#region Notification
+        $("#nf input")[0].checked = Settings.settings.activateNotifications;
+        $("#nf input")[1].value = Settings.settings.notificationColor;
+        $("#nf input")[2].value = Settings.settings.notificationDuration;
+        //#endregion
+
+        $("#save input").click(function()
+        { 
+            _this.saveSettings();
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen gespeichert");
+        });
+        $("#reset a").click(function()
+        {
+            localStorage.removeItem("Selfmade_M0d_Settings");
+            Settings.settings = Object.assign({},_this.defaultSettings);
+            $("a.selfmade_m0d").click();
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen zurückgesetzt");
+        });
+    
+        $(".box-from-label").next().each(function()
+        {
+            $(this).click(function()
+            {
+                $(this).prev()[0].checked = !$(this).prev()[0].checked;
+            });
+        });
+    }
+
+    saveSettings()
+    {
+        //#region Blocked Tags
+        Settings.settings.blockedTags = [];
+        $("#bt input").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
+            Settings.settings.blockedTags.push(text.toLowerCase());
+        });
+
+        Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length >0?true:false;
+        Settings.settings.onlyGoodTags = $("#bt input")[1].checked;
+        Settings.settings.amountOfTagsChecked = Number($("#bt input")[2].value);
+        //#endregion
+
+        //#region Blocked Users
+        Settings.settings.blockedUsers = [];
+        $("#bu input:first").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
+            Settings.settings.blockedUsers.push(text.toLowerCase());
+        });
+
+        Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
+        Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
+        //#endregion
+
+        //#region Comments
+        Settings.settings.commentBlacklist = [];
+        $("#bc input:first").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
+            Settings.settings.commentBlacklist.push(text.toLowerCase());
+        });
+        Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length >0 ? true:false;
+        Settings.settings.blockCommentsByBenis = $("#bc input")[1].checked;
+        Settings.settings.commentMinBenis = Number($("#bc input")[2].value);
+        Settings.settings.collapseTooLongComments = $("#bc input")[3].checked;
+        //#endregion
+
+        //#region Blocked Userranks
+        Settings.settings.blockedUserRanks = [];
+        let tmp = $("#br input:checked").next();
+        for(let i = 0; i < tmp.length; i++)
+        {
+            Settings.settings.blockedUserRanks.push(tmp[i].innerText.trim());
+        }
+        Settings.settings.skipUploadByUserRank = Settings.settings.blockedUserRanks.length >0 ? true:false;
+        //#endregion
+
+        //#region min Benis
+        Settings.settings.skipUploadByTotalBenis = $("#mb input")[0].checked;
+        Settings.settings.minBenis = Number($("#mb input")[1].value);
+        Settings.settings.skipUploadByAverageBenis = $("#mb input")[2].checked;
+        Settings.settings.minAverageBenis = Number($("#mb input")[3].value);
+        //#endregion
+
+        //#region Skip
+        Settings.settings.nextUploadDirection = $("#sr input")[0].checked ? -1:1;
+        Settings.settings.skipUploadAfterRate = $("#sr input")[1].checked;
+        //#endregion
+        
+        //#region Others
+        Settings.settings.autoRateSkippedUploads = false;
+        //#endregion
+
+        //#region Notification
+        Settings.settings.activateNotifications = $("#nf input")[0].checked;
+        Settings.settings.notificationColor = $("#nf input")[1].value;
+        Settings.settings.notificationDuration = Number($("#nf input")[2].value);
+        $("#notificationbox").css("background",Settings.settings.notificationColor);
+
+        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
+        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
+        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
+        var yiq = ((r*299)+(g*587)+(b*114))/1000;
+        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
+        //#endregion
+ 
+        Settings.quickSave();
+    }
+}
+/* harmony export (immutable) */ __webpack_exports__["a"] = Settings;
+
+
+Settings.settings = {};
+
+
+/***/ }),
 /* 2 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__EventHandler__ = __webpack_require__(5);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Settings__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__EventHandler__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Settings__ = __webpack_require__(1);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Modules__ = __webpack_require__(6);
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Keypress__ = __webpack_require__(7);
 
@@ -836,18 +836,6 @@ $(document).ready(()=> new Main());
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-module.exports = "<span class=\"filter-setting\" data-flag=\"8\"> \r\n    <div class=\"filter-name\">\r\n        <span class=\"filter-check\"></span>Self-made M0d\r\n    </div> \r\n    <div class=\"filter-desc\">Aktiviere das Selfmade M0d Addon. Speichern nicht erforderlich</div> \r\n</span>";
-
-/***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-module.exports = "<div class=\"form-section selfmade_m0d\">\r\n        <div id=\"bt\">\r\n            Geblockte Tags:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"tag1,tag2,tag3,...\" title=\"Tags mit Komma trennen!\"></input>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"onlyGoodTags\">\r\n                <label for=\"onlyGoodTags\"> Ignoriere Tags mit negativen Benis </label>\r\n            Anzahl der zu berücksichtigen Tags: <input type=\"number\" min=\"-1\" max=\"999\" value=\"-1\" title=\"-1 = alle\">\r\n        </div>\r\n        <br><hr />\r\n        <div id=\"bu\" title=\"Nutzernamen mit Komma trennen!\">\r\n            Geblockte Nutzer:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"nutzer1,nutzer2,nutzer3,...\"></input>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"bc\">\r\n                <label for=\"bc\"> Kommentare von geblockten Nutzern entfernen</label>\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"bc\">\r\n            Geblockte Wörter in den Kommentaren:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"wort1,wort2,wort3,...\" title=\"Wörter mit Komma trennen!\"></input><br>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"ComMinBenis\">\r\n                <label for=\"ComMinBenis\" style=\"display:inline-block\"> Mindest Benis bei Kommentaren:</label> <input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"shortComms\" /> <label for=\"shortComms\"> Zu lange Kommentare kürzen</label>\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"br\" >\r\n            Geblockte Ränge:<br>\r\n            <div style=\"margin-left:25px;\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Neuschwuchtel\">\r\n                    <label for=\"Neuschwuchtel\" style=\"color:#E108E9\" >Neuschwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Schwuchtel\">\r\n                    <label for=\"Schwuchtel\" style=\"color:#FFFFFF\">Schwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Altschwuchtel\">\r\n                    <label for=\"Altschwuchtel\" style=\"color:#5BB91C\"> Altschwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Wichtler\">\r\n                    <label for=\"Wichtler\" style=\"color:#D23C22\"> Wichtler</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Edler Spender\">\r\n                    <label for=\"Edler Spender\" style=\"color:#1cb992\"> Edler Spender</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Gesperrt\">\r\n                    <label for=\"Gesperrt\" style=\"color:#444444\"> Gesperrt </label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Fliesentischbesitzer\">\r\n                    <label for=\"Fliesentischbesitzer\" style=\"color:#6C432B\"> Fliesentischbesitzer</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Lebende Legende\">\r\n                    <label for=\"Lebende Legende\" style=\"color:#1cb992\"> Lebende Legende</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Moderator\">\r\n                    <label for=\"Moderator\" style=\"color:#008FFF\"> Moderator</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Administrator\">\r\n                    <label for=\"Administrator\" style=\"color:#FF9900\"> Administrator</label>\r\n            </div>\t\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"mb\" >\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"minBenis\" >\r\n                <label for=\"minBenis\" style=\"display:inline-block\">Mindest Benis: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\"><br>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"minAverageBenis\" >\r\n                <label for=\"minAverageBenis\" style=\"display:inline-block\"> Mindest Durchschnittsbenis: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"sr\" >\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"sd\">\r\n                <label for=\"sd\"> Nach rechts Skippen</label>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"sar\">\r\n                <label for=\"sar\"> Nach Bewertung skippen</label>\r\n        </div>\r\n        <br><hr>\r\n        <div id=\"nf\">\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"notification\">\r\n                <label for=\"notification\">Notifications anzeigen</label>\r\n            Notificationsfarbe: <input type=\"color\" id=\"color\"><br>\r\n            Notificationdauer in Sekunden: <input type=\"number\">\r\n        </div>\r\n        <br>\r\n        <div id=\"save\">\r\n            <input type=\"submit\" value=\"Speichern\" class=\"confirm settings-save\"></input>\r\n        </div>\r\n        <br>\r\n        <div id=\"reset\">\r\n            <a class=\"action clear-settings-button\">Einstellungen zurücksetzen</a>\r\n        </div>\r\n    </div>";
-
-/***/ }),
-/* 5 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -914,12 +902,24 @@ class EventHandler
 
 
 /***/ }),
+/* 4 */
+/***/ (function(module, exports) {
+
+module.exports = "<div class=\"form-section selfmade_m0d\">\r\n        <div id=\"bt\">\r\n            Geblockte Tags:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"tag1,tag2,tag3,...\" title=\"Tags mit Komma trennen!\"></input>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"onlyGoodTags\">\r\n                <label for=\"onlyGoodTags\"> Ignoriere Tags mit negativen Benis </label>\r\n            Anzahl der zu berücksichtigen Tags: <input type=\"number\" min=\"-1\" max=\"999\" value=\"-1\" title=\"-1 = alle\">\r\n        </div>\r\n        <br><hr />\r\n        <div id=\"bu\" title=\"Nutzernamen mit Komma trennen!\">\r\n            Geblockte Nutzer:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"nutzer1,nutzer2,nutzer3,...\"></input>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"bc\">\r\n                <label for=\"bc\"> Kommentare von geblockten Nutzern entfernen</label>\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"bc\">\r\n            Geblockte Wörter in den Kommentaren:<br>\r\n            <div class=\"tag-container\"></div>\r\n            <input placeholder=\"wort1,wort2,wort3,...\" title=\"Wörter mit Komma trennen!\"></input><br>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"ComMinBenis\">\r\n                <label for=\"ComMinBenis\" style=\"display:inline-block\"> Mindest Benis bei Kommentaren:</label> <input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"shortComms\" /> <label for=\"shortComms\"> Zu lange Kommentare kürzen</label>\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"br\" >\r\n            Geblockte Ränge:<br>\r\n            <div style=\"margin-left:25px;\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Neuschwuchtel\">\r\n                    <label for=\"Neuschwuchtel\" style=\"color:#E108E9\" >Neuschwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Schwuchtel\">\r\n                    <label for=\"Schwuchtel\" style=\"color:#FFFFFF\">Schwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Altschwuchtel\">\r\n                    <label for=\"Altschwuchtel\" style=\"color:#5BB91C\"> Altschwuchtel</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Wichtler\">\r\n                    <label for=\"Wichtler\" style=\"color:#D23C22\"> Wichtler</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Edler Spender\">\r\n                    <label for=\"Edler Spender\" style=\"color:#1cb992\"> Edler Spender</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Gesperrt\">\r\n                    <label for=\"Gesperrt\" style=\"color:#444444\"> Gesperrt </label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Fliesentischbesitzer\">\r\n                    <label for=\"Fliesentischbesitzer\" style=\"color:#6C432B\"> Fliesentischbesitzer</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Lebende Legende\">\r\n                    <label for=\"Lebende Legende\" style=\"color:#1cb992\"> Lebende Legende</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Moderator\">\r\n                    <label for=\"Moderator\" style=\"color:#008FFF\"> Moderator</label>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"Administrator\">\r\n                    <label for=\"Administrator\" style=\"color:#FF9900\"> Administrator</label>\r\n            </div>\t\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"mb\" >\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"minBenis\" >\r\n                <label for=\"minBenis\" style=\"display:inline-block\">Mindest Benis: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\"><br>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"minAverageBenis\" >\r\n                <label for=\"minAverageBenis\" style=\"display:inline-block\"> Mindest Durchschnittsbenis: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n        </div>\r\n        <br><hr/>\r\n        <div id=\"sr\" >\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"sd\">\r\n                <label for=\"sd\"> Nach rechts Skippen</label>\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"sar\">\r\n                <label for=\"sar\"> Nach Bewertung skippen</label>\r\n        </div>\r\n        <br><hr>\r\n        <div id=\"nf\">\r\n            <input type=\"checkbox\" class=\"box-from-label\" name=\"notification\">\r\n                <label for=\"notification\">Notifications anzeigen</label>\r\n            Notificationsfarbe: <input type=\"color\" id=\"color\"><br>\r\n            Notificationdauer in Sekunden: <input type=\"number\">\r\n        </div>\r\n        <br>\r\n        <div id=\"save\">\r\n            <input type=\"submit\" value=\"Speichern\" class=\"confirm settings-save\"></input>\r\n        </div>\r\n        <br>\r\n        <div id=\"reset\">\r\n            <a class=\"action clear-settings-button\">Einstellungen zurücksetzen</a>\r\n        </div>\r\n    </div>";
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports) {
+
+module.exports = "<span class=\"filter-setting\" data-flag=\"8\"> \r\n    <div class=\"filter-name\">\r\n        <span class=\"filter-check\"></span>Self-made M0d\r\n    </div> \r\n    <div class=\"filter-desc\">Aktiviere das Selfmade M0d Addon. Speichern nicht erforderlich</div> \r\n</span>";
+
+/***/ }),
 /* 6 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(0);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(0);
 
 
 
@@ -1181,8 +1181,8 @@ class Modules
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(1);
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Settings__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Settings__ = __webpack_require__(1);
 
 
 
