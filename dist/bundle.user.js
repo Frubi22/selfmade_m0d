@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.1pre
+// @version		0.7.1pre.1
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
