@@ -13,8 +13,8 @@ export default class Keypress
 
     private manageKeypress(e:any):void
     {
-        console.log(e);
-        if((<any>$(e.path[0])).nodeName != "TEXTAREA" && (<any>$(e.path[0])).nodeName != "INPUT")
+        console.log($(e.path)[0].nodeName);
+        if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
         {
             if(e.key == "e")
             {

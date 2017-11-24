@@ -4,8 +4,8 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.1pre.1
-// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
+// @version		0.7.1pre2
+// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -885,8 +885,8 @@ class Keypress {
         window.addEventListener("keypress", function (e) { _this.manageKeypress(e); });
     }
     manageKeypress(e) {
-        console.log(e);
-        if ($(e.path[0]).nodeName != "TEXTAREA" && $(e.path[0]).nodeName != "INPUT") {
+        console.log($(e.path)[0].nodeName);
+        if ($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT") {
             if (e.key == "e") {
                 this.pr0gramm.navigateTo("settings/site", 0);
             }
