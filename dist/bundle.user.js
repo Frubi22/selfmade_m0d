@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.2pre1
+// @version		0.7.2pre2
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
 // ==/UserScript==
@@ -178,48 +178,50 @@ class Utils
             $(element).attr("data-href", location);
             element.innerText = text;
 
-            
             $("#notificationbox").append(element);
             $(element).slideToggle();
             $("#notificationbox span:not(:last)").animate(
             {
                 bottom: "+=60" 
-            }
-            );
+            });
 
-            $(element).click(function()
+            $(element).click(function(e)
             {
-                let location = $(this).attr("data-href");
-                if(location != "")
+                if(e.button == 0)
                 {
-                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
-                    Utils.pr0gramm.navigateTo(location,0);
-                    setTimeout(function()
+                    let location = $(this).attr("data-href");
+                    if(location != "")
                     {
-                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
-                    },10);
-                   
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
+                        Utils.pr0gramm.navigateTo(location,0);
+                        setTimeout(function()
+                        {
+                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
+                        },10); 
+                    }
+                    removeNotification(this);
                 }
-                $(this).animate(
+                else if(e.button == 2)
                 {
-                    left: "-300px"
-                },function()
-                {
-                    this.remove()
-                });
+                    removeNotification(this);
+                }
             });
         
             setTimeout(function()
             {
-                $(element).animate(
-                {
-                    left: "-300px"
-                },function()
-                {
-                    element.remove()
-                });
+                removeNotification(element);
             },__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.notificationDuration*1000);
         }
+    }
+    removeNotification(element)
+    {
+        $(element).animate(
+            {
+                left: "-300px"
+            },function()
+            {
+                this.remove()
+            });
     }
 
     addBlockTagSign()

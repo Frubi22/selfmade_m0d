@@ -97,48 +97,50 @@ export default class Utils
             $(element).attr("data-href", location);
             element.innerText = text;
 
-            
             $("#notificationbox").append(element);
             $(element).slideToggle();
             $("#notificationbox span:not(:last)").animate(
             {
                 bottom: "+=60" 
-            }
-            );
+            });
 
-            $(element).click(function()
+            $(element).click(function(e)
             {
-                let location = $(this).attr("data-href");
-                if(location != "")
+                if(e.button == 0)
                 {
-                    Settings.settings.isActive = false;
-                    Utils.pr0gramm.navigateTo(location,0);
-                    setTimeout(function()
+                    let location = $(this).attr("data-href");
+                    if(location != "")
                     {
-                        Settings.settings.isActive = true;
-                    },10);
-                   
+                        Settings.settings.isActive = false;
+                        Utils.pr0gramm.navigateTo(location,0);
+                        setTimeout(function()
+                        {
+                            Settings.settings.isActive = true;
+                        },10); 
+                    }
+                    removeNotification(this);
                 }
-                $(this).animate(
+                else if(e.button == 2)
                 {
-                    left: "-300px"
-                },function()
-                {
-                    this.remove()
-                });
+                    removeNotification(this);
+                }
             });
         
             setTimeout(function()
             {
-                $(element).animate(
-                {
-                    left: "-300px"
-                },function()
-                {
-                    element.remove()
-                });
+                removeNotification(element);
             },Settings.settings.notificationDuration*1000);
         }
+    }
+    removeNotification(element)
+    {
+        $(element).animate(
+            {
+                left: "-300px"
+            },function()
+            {
+                this.remove()
+            });
     }
 
     addBlockTagSign()
