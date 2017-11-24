@@ -1,17 +1,17 @@
 import Utils from "./Utils";
 import Settings from "./Settings";
 
-declare let p:any;
 export default class Keypress
 {
-    private pr0gramm = p;
     constructor()
     {
         let _this = this;
         window.addEventListener("keypress", function(e){_this.shortcuts(e);})
+        this.pr0gramm = p
     }
 
-    private shortcuts(e:any):void
+
+    shortcuts(e)
     {
         if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
         {

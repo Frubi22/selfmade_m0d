@@ -1,12 +1,7 @@
-declare let p:any;
+
 export default class EventHandler
 {
-    pr0gramm:any = p;
-
-    keyPress:Event;
-    settingsReady:Event;
-    commentsReady:Event;
-    userReady:Event;
+    
 
     constructor()
     {
@@ -14,7 +9,7 @@ export default class EventHandler
         this.settingsReady = new Event("settingsReady");
         this.commentsReady = new Event("commentsReady");
         this.userReady = new Event("userReady");
-
+        this.pr0gramm = p;
         this.addListener();
     }
 
@@ -25,7 +20,7 @@ export default class EventHandler
         //keyPress Event
         (function(handleKey)
         {
-            _this.pr0gramm.hotkeys.handleKey = function(code:any)
+            _this.pr0gramm.hotkeys.handleKey = function(code)
             {
                 handleKey.call(this,code);
                 window.dispatchEvent(_this.keyPress);
@@ -35,7 +30,7 @@ export default class EventHandler
         //settingsReady Event
         (function(render)
         {
-            _this.pr0gramm.View.Settings.prototype.render = function(params:any)
+            _this.pr0gramm.View.Settings.prototype.render = function(params)
             {
                 render.call(this, params);
                 window.dispatchEvent(_this.settingsReady);

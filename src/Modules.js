@@ -1,12 +1,12 @@
 import Settings from "./Settings";
 import Utils from "./Utils";
 
-declare let p:any;
 export default class Modules
 {
-    private pr0gramm = p;
+    
     constructor()
     {
+        this.pr0gramm = p;
         let _this = this;
         window.addEventListener("commentsReady", function()
         {
@@ -14,7 +14,7 @@ export default class Modules
         });
     }
 
-    private executeModules():void
+    executeModules()
     {
         let _this = this;
 
@@ -58,7 +58,7 @@ export default class Modules
             }
     }
 
-    private skipUploadByTag():boolean
+    skipUploadByTag()
     {
         let _this = this;
         let tags = Utils.getTags();
@@ -78,7 +78,7 @@ export default class Modules
         return false;
     }
 
-    private skipUploadByUser():boolean
+    skipUploadByUser()
     {
         let user = Utils.getUser();
         if(Settings.settings.blockedUsers.includes(user))
@@ -93,7 +93,7 @@ export default class Modules
         return false;
     }
 
-    private skipUploadByTotalBenis():boolean
+    skipUploadByTotalBenis()
     { 
         let score = Utils.getTotalBenis();
         if(score != undefined)
@@ -112,7 +112,7 @@ export default class Modules
         return false;
     }
 
-    private skipUploadByAverageBenis():boolean
+    skipUploadByAverageBenis()
     {
         let score = Utils.getAverageBenis();
         if(score != undefined)
@@ -131,7 +131,7 @@ export default class Modules
         return false;
     }
 
-    private skipUploadByUserRank():boolean
+    skipUploadByUserRank()
     {
         let rank = Utils.getUserRank($('.item-details .user')[0]);
         if(Settings.settings.blockedUserRanks.includes(rank))
@@ -147,7 +147,7 @@ export default class Modules
         return false;
     }
 
-    private blockCommentsByUser():void
+    blockCommentsByUser()
     {
         let _this = this;
         $('.comment:not(textarea)').each(function()
@@ -160,7 +160,7 @@ export default class Modules
         });
     }
 
-    private blockCommentsByBlacklist():void
+    blockCommentsByBlacklist()
     {
         let _this = this;
         $('.comment .comment-content').each(function()
@@ -180,7 +180,7 @@ export default class Modules
         });
     }
 
-    private blockCommentsByBenis():void
+    blockCommentsByBenis()
     {
         let _this = this;
         $('.comment-foot .score').each(function()
@@ -191,7 +191,7 @@ export default class Modules
         });
     }
 
-    private blockCommentsByRank():void
+    blockCommentsByRank()
     {
         let _this = this;
         $('.comment-foot .user').each(function()
@@ -202,7 +202,7 @@ export default class Modules
         });
     }
 
-    private blockComment(element:any, text:string, collapse:boolean= true):void
+    blockComment(element, text, collapse= true)
     {
         let tmp = $(element).find($('.comment-content'));
         if(tmp.attr("data-comment") == undefined)
@@ -231,9 +231,9 @@ export default class Modules
         }
     }
 
-    private collapseTooLongComments():void
+    collapseTooLongComments()
     {
-        let size:number = 200;
+        let size = 200;
         let _this = this;
         $('.comment .comment-content').each(function()
         {

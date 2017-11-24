@@ -3,21 +3,13 @@ const webpack = require('webpack');
 const fs = require('fs');
 
 module.exports = {
-  entry: './src/index.ts',
+  entry: './src/index.js',
   output: {
     filename: 'bundle.user.js',
     path: path.resolve(__dirname, 'dist')
   },
-  resolve:{
-    extensions: [".ts", ".js", ".json"]
-  },
   module: {
       rules: [
-        {
-          test: /\.ts$/, 
-          exclude: /node_modules/,
-          loader: 'ts-loader'
-        },
         {
           test: /\.html$/,
           exclude: /node_modules/,

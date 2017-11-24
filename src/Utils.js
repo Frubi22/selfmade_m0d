@@ -1,10 +1,8 @@
 import Settings from "./Settings";
 let filterHTML = require("./template/filter.html");
-declare let p:any;
 
 export default class Utils
 {
-    private static pr0gramm = p;
     constructor()
     {
         let _this = this;
@@ -24,7 +22,7 @@ export default class Utils
         })
     }
 
-    private createFilter()
+    createFilter()
     {
         $(".filter-setting:last").after(filterHTML);
 
@@ -54,16 +52,16 @@ export default class Utils
         });
     }
 
-    public static createNameTag(element:JQuery, data:string)
+    static createNameTag(element, data)
     {
         let wrapper = document.createElement("span");
         $(wrapper).addClass("tag");
         
         $(wrapper).text(data);
     
-        let x:any = document.createElement("a");
+        let x = document.createElement("a");
     
-        (<any>$(x)).href="#";
+        $(x).href="#";
         $(x).html("&nbsp;&nbsp;x");
         $(x).css("color","red");
     
@@ -73,14 +71,14 @@ export default class Utils
             $(this).parent().remove();
         });
     
-        (<any>wrapper).append(x);
+        wrapper.append(x);
     
-        (<any>element).value = "";
+        element.value = "";
     
         $(element).prev().append(wrapper);
     }
 
-    private createNotificationbox()
+    createNotificationbox()
     {
         let notificationbox = document.createElement("div");
         $(notificationbox).addClass("selfmade_m0d");
@@ -88,7 +86,7 @@ export default class Utils
         $("body").append(notificationbox);
     }
 
-    public static showNotification(text:String, location:string = "")
+    static showNotification(text, location = "")
     {
         let _this = this;
         if(Settings.settings.activateNotifications)
@@ -97,7 +95,7 @@ export default class Utils
             element.id = "notification";
             $(element).addClass("selfmade_m0d");
             $(element).attr("data-href", location);
-            (<any>element).innerText = text;
+            element.innerText = text;
 
             
             $("#notificationbox").append(element);
@@ -143,7 +141,7 @@ export default class Utils
         }
     }
 
-    private addBlockTagSign():void
+    addBlockTagSign()
     {
         let blockTagSign = document.createElement("span");
         blockTagSign.className = "block-tag"
@@ -190,7 +188,7 @@ export default class Utils
         }
     }
     
-    private addBlockUserSign(userpage:boolean=false):void
+    addBlockUserSign(userpage=false)
     {
         let blockUserSign = document.createElement("span");
         blockUserSign.className = "block-user";
@@ -198,7 +196,7 @@ export default class Utils
         if($(".block-user").length == 0)
         {
             if(userpage)
-                (<any>$(".user-head span")[0]).before(blockUserSign);
+                $(".user-head span")[0].before(blockUserSign);
             else
                 $(blockUserSign).insertAfter($(".user:not(.user-mark)"));
 
@@ -271,7 +269,7 @@ export default class Utils
         }
     }
 
-    public static nextUpload():void
+    static nextUpload()
     {
         if(Settings.settings.nextUploadDirection == 1)
         {
@@ -283,7 +281,7 @@ export default class Utils
         }
     }
 
-    public static rateUpload(direction:number = -1):void
+    static rateUpload(direction = -1)
     {
         Utils.showNotification("Upload wurde bewertet");
         if(direction == 1)
@@ -298,7 +296,7 @@ export default class Utils
         }
     }
 
-    public static getTags():string[]
+    static getTags()
     {
         let tags = [];
         let rawTags;
@@ -324,21 +322,21 @@ export default class Utils
     
         for(let i = 0; i <amount; i++)
         {
-            tags.push((<any>rawTags[i].children[0]).innerText);
+            tags.push(rawTags[i].children[0].innerText);
         }
         return tags;
     }
 
-    public static getTotalBenis():number
+    static getTotalBenis()
     {
         let score = $(".item-vote .score");
         if(score.length != 0)
         {
-            return (<any>$(".item-vote .score")[0]).innerText;
+            return $(".item-vote .score")[0].innerText;
         }
         return undefined;
     }
-    public static getAverageBenis():number
+    static getAverageBenis()
     {
         let scoreElement = $(".item-vote .score");
         if(scoreElement.length != 0)
@@ -355,14 +353,14 @@ export default class Utils
         else undefined; 
     }
 
-    public static getUser():string
+    static getUser()
     {
         return $(".item-details .user")[0].innerText.toLowerCase();        
     }
 
-    public static getUserRank(user:any):string
+    static getUserRank(user)
     {
-        let returnText:string;
+        let returnText;
         switch(user.classList[1])
         {
             case("um0"):
@@ -402,3 +400,5 @@ export default class Utils
         return returnText;
     }
 }
+
+Utils.pr0gramm = p;

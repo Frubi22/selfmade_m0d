@@ -75,33 +75,36 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(1);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Utils_1 = __webpack_require__(1);
+
 let settingsPageContent = __webpack_require__(4);
-class Settings {
-    constructor() {
-        this.pr0gramm = p;
-        this.defaultSettings = {
-            isActive: true,
-            skipUploadByTag: false,
-            blockedTags: [],
-            onlyGoodTags: true,
+
+class Settings 
+{
+    constructor()
+    { 
+        this.defaultSettings =
+        {
+            isActive : true,
+            skipUploadByTag : false,
+            blockedTags : [],
+            onlyGoodTags : true,
             amountOfTagsChecked: -1,
-            skipUploadByUser: false,
-            blockedUsers: [],
-            skipUploadByTotalBenis: false,
-            minBenis: 0,
-            skipUploadByAverageBenis: false,
-            minAverageBenis: 0,
-            skipUploadByUserRank: false,
-            blockedUserRanks: [],
-            nextUploadDirection: -1,
-            autoRateSkippedUploads: false,
-            blockCommentsByUser: false,
+            skipUploadByUser : false,
+            blockedUsers : [],
+            skipUploadByTotalBenis : false,
+            minBenis : 0,
+            skipUploadByAverageBenis : false,
+            minAverageBenis : 0,
+            skipUploadByUserRank : false,
+            blockedUserRanks : [],
+            nextUploadDirection : -1,
+            autoRateSkippedUploads : false,
+            blockCommentsByUser : false,
             commentBlacklist: [],
             blockCommentsByBlacklist: false,
             blockCommentsByBenis: false,
@@ -111,515 +114,724 @@ class Settings {
             notificationDuration: 3.0,
             collapseTooLongComments: true,
             skipUploadAfterRate: false
-        };
-        let _this = this;
-        Settings.settings = Object.assign({}, this.defaultSettings);
-        this.readSettings();
-        window.addEventListener("settingsReady", function () { _this.addSettingsTab(); });
-        if (window.location.href.includes("Selfmade_M0d")) {
-            this.pr0gramm.navigateTo("settings/site", 0);
         }
-    }
-    readSettings() {
+        this.pr0gramm = p;
+        let _this = this
+        Settings.settings = Object.assign({},this.defaultSettings);
+        this.readSettings();  
+        window.addEventListener("settingsReady", function(){_this.addSettingsTab()});
+        if(window.location.href.includes("Selfmade_M0d")){this.pr0gramm.navigateTo("settings/site",0);}
+    } 
+ 
+
+    
+
+    readSettings()
+    {
         let tmp = JSON.parse(localStorage.getItem("Selfmade_M0d_Settings"));
-        if (tmp != null) {
-            Object.keys(tmp).forEach(function (e) {
-                if (Settings.settings[e] != undefined)
-                    Settings.settings[e] = tmp[e];
+        if(tmp != null)
+        {
+            Object.keys(tmp).forEach(function(e)
+            {
+                if(Settings.settings[e] != undefined)
+                    Settings.settings[e] = tmp[e];  
             });
         }
-        $("#notificationbox").css("background", Settings.settings.notificationColor);
-        var r = parseInt(Settings.settings.notificationColor.substr(1, 2), 16);
-        var g = parseInt(Settings.settings.notificationColor.substr(3, 2), 16);
-        var b = parseInt(Settings.settings.notificationColor.substr(5, 2), 16);
-        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        $("#notificationbox").css("color", (yiq >= 128) ? 'black' : 'white');
+        $("#notificationbox").css("background",Settings.settings.notificationColor);
+        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
+        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
+        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
+        var yiq = ((r*299)+(g*587)+(b*114))/1000;
+        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
     }
-    static quickSave() {
+
+    static quickSave()
+    {
         localStorage.setItem("Selfmade_M0d_Settings", JSON.stringify(Settings.settings));
     }
-    addSettingsTab() {
-        let _this = this;
+
+    addSettingsTab()
+    {
+        let _this = this
         let tmp = $(".selfmade_M0d");
-        if (tmp.length != 0) {
+        if(tmp.length != 0)
+        {
             return;
         }
         let button = document.createElement("a");
         button.innerText = "Selfmade M0d";
         button.className = "selfmade_m0d";
         button.href = "/settings/Selfmade_M0d";
-        $(button).click(function (e) {
+        $(button).click(function(e)
+        {
             e.preventDefault();
-            window.history.pushState({}, "Selfmade M0d Settings", "/settings/Selfmade_M0d");
+            window.history.pushState({},"Selfmade M0d Settings","/settings/Selfmade_M0d");
             _this.createSettings();
         });
-        $(".tab-bar")[0].appendChild(button);
+        $(".tab-bar")[0].appendChild(button); 
     }
-    createSettings() {
+
+    createSettings()
+    {
         let _this = this;
-        $(".pane.form-page").empty();
+        $(".pane.form-page").empty(); 
         $(".active").toggleClass("active");
         $(".selfmade_m0d").addClass("active");
+        
         $(".pane.form-page")[0].innerHTML = settingsPageContent;
-        Settings.settings.blockedTags.forEach(function (e) {
-            Utils_1.default.createNameTag($("#bt input")[0], e);
+    
+        //#region Blocked Tags
+        Settings.settings.blockedTags.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bt input")[0], e);
         });
-        $("#bt input:first").keyup(function (e) {
-            if (e.key == ",") {
-                let text = this.value.slice(0, this.value.length - 1).trim().toLowerCase();
-                if (text.length < 3) {
+    
+        $("#bt input:first").keyup(function(e){
+            if(e.key == ",")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
                     this.value = text;
                     return;
                 }
-                Utils_1.default.createNameTag(this, text);
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
             }
         });
+    
         $("#bt input")[1].checked = Settings.settings.onlyGoodTags;
         $("#bt input")[2].value = Settings.settings.amountOfTagsChecked;
-        Settings.settings.blockedUsers.forEach(function (e) {
-            Utils_1.default.createNameTag($("#bu input")[0], e);
+        //#endregion
+
+        //#region Blocked Users
+        Settings.settings.blockedUsers.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bu input")[0], e);
         });
-        $("#bu input:first").keyup(function (e) {
-            if (e.key == ",") {
-                let text = this.value.slice(0, this.value.length - 1).trim().toLowerCase();
-                if (text.length < 3) {
+    
+        $("#bu input:first").keyup(function(e){
+            if(e.key == ",")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
                     this.value = text;
                     return;
                 }
-                Utils_1.default.createNameTag(this, text);
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
             }
         });
         $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
-        Settings.settings.commentBlacklist.forEach(function (e) {
-            Utils_1.default.createNameTag($("#bc input")[0], e);
+        //#endregion
+
+        //#region Comments
+        Settings.settings.commentBlacklist.forEach(function(e)
+        {
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bc input")[0], e);
         });
-        $("#bc input:first").keyup(function (e) {
-            if (e.key == "," || e.key == " ") {
-                let text = this.value.slice(0, this.value.length - 1).trim().toLowerCase();
-                if (text.length < 3) {
+    
+        $("#bc input:first").keyup(function(e){
+            if(e.key == "," || e.key == " ")
+            {
+                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
+                if(text.length <3) 
+                {
                     this.value = text;
                     return;
                 }
-                Utils_1.default.createNameTag(this, text);
+                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
             }
         });
         $("#bc input")[1].checked = Settings.settings.blockCommentsByBenis;
         $("#bc input")[2].value = Settings.settings.commentMinBenis;
         $("#bc input")[3].checked = Settings.settings.collapseTooLongComments;
-        Settings.settings.blockedUserRanks.forEach(function (e) {
+        //#endregion
+
+        //#region Blocked Usersranks
+        Settings.settings.blockedUserRanks.forEach(function(e)
+        {
             let tmp = $("label:contains(" + e + ")");
-            if (tmp.length != 0)
-                $("label:contains(" + e + ")").prev()[0].checked = true;
+            if(tmp.length != 0)
+            $("label:contains(" + e + ")").prev()[0].checked = true;
         });
+        //#endregion
+
+        //#region minBenis
         $("#mb input")[0].checked = Settings.settings.skipUploadByTotalBenis;
         $("#mb input")[1].value = Settings.settings.minBenis;
         $("#mb input")[2].checked = Settings.settings.skipUploadByAverageBenis;
         $("#mb input")[3].value = Settings.settings.minAverageBenis;
-        $("#sr input")[0].checked = Settings.settings.nextUploadDirection == -1 ? true : false;
+        //#endregion
+
+        //#region Skip
+        $("#sr input")[0].checked = Settings.settings.nextUploadDirection==-1?true:false;
         $("#sr input")[1].checked = Settings.settings.skipUploadAfterRate;
+        //#endregion
+
+        //#region Notification
         $("#nf input")[0].checked = Settings.settings.activateNotifications;
         $("#nf input")[1].value = Settings.settings.notificationColor;
         $("#nf input")[2].value = Settings.settings.notificationDuration;
-        $("#save input").click(function () {
+        //#endregion
+
+        $("#save input").click(function()
+        { 
             _this.saveSettings();
-            Utils_1.default.showNotification("Einstellungen gespeichert");
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen gespeichert");
         });
-        $("#reset a").click(function () {
+        $("#reset a").click(function()
+        {
             localStorage.removeItem("Selfmade_M0d_Settings");
-            Settings.settings = Object.assign({}, _this.defaultSettings);
+            Settings.settings = Object.assign({},_this.defaultSettings);
             $("a.selfmade_m0d").click();
-            Utils_1.default.showNotification("Einstellungen zurückgesetzt");
+            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Einstellungen zurückgesetzt");
         });
-        $(".box-from-label").next().each(function () {
-            $(this).click(function () {
+    
+        $(".box-from-label").next().each(function()
+        {
+            $(this).click(function()
+            {
                 $(this).prev()[0].checked = !$(this).prev()[0].checked;
             });
         });
     }
-    saveSettings() {
+
+    saveSettings()
+    {
+        //#region Blocked Tags
         Settings.settings.blockedTags = [];
-        $("#bt input").prev().find("span").each(function () {
-            let text = this.innerText.slice(0, this.innerText.length - 3);
+        $("#bt input").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.blockedTags.push(text.toLowerCase());
         });
-        Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length > 0 ? true : false;
+
+        Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length >0?true:false;
         Settings.settings.onlyGoodTags = $("#bt input")[1].checked;
         Settings.settings.amountOfTagsChecked = Number($("#bt input")[2].value);
+        //#endregion
+
+        //#region Blocked Users
         Settings.settings.blockedUsers = [];
-        $("#bu input:first").prev().find("span").each(function () {
-            let text = this.innerText.slice(0, this.innerText.length - 3);
+        $("#bu input:first").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.blockedUsers.push(text.toLowerCase());
         });
-        Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length > 0 ? true : false;
+
+        Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
         Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
+        //#endregion
+
+        //#region Comments
         Settings.settings.commentBlacklist = [];
-        $("#bc input:first").prev().find("span").each(function () {
-            let text = this.innerText.slice(0, this.innerText.length - 3);
+        $("#bc input:first").prev().find("span").each(function()
+        {
+            let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.commentBlacklist.push(text.toLowerCase());
         });
-        Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length > 0 ? true : false;
+        Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length >0 ? true:false;
         Settings.settings.blockCommentsByBenis = $("#bc input")[1].checked;
         Settings.settings.commentMinBenis = Number($("#bc input")[2].value);
         Settings.settings.collapseTooLongComments = $("#bc input")[3].checked;
+        //#endregion
+
+        //#region Blocked Userranks
         Settings.settings.blockedUserRanks = [];
         let tmp = $("#br input:checked").next();
-        for (let i = 0; i < tmp.length; i++) {
+        for(let i = 0; i < tmp.length; i++)
+        {
             Settings.settings.blockedUserRanks.push(tmp[i].innerText.trim());
         }
-        Settings.settings.skipUploadByUserRank = Settings.settings.blockedUserRanks.length > 0 ? true : false;
+        Settings.settings.skipUploadByUserRank = Settings.settings.blockedUserRanks.length >0 ? true:false;
+        //#endregion
+
+        //#region min Benis
         Settings.settings.skipUploadByTotalBenis = $("#mb input")[0].checked;
         Settings.settings.minBenis = Number($("#mb input")[1].value);
         Settings.settings.skipUploadByAverageBenis = $("#mb input")[2].checked;
         Settings.settings.minAverageBenis = Number($("#mb input")[3].value);
-        Settings.settings.nextUploadDirection = $("#sr input")[0].checked ? -1 : 1;
+        //#endregion
+
+        //#region Skip
+        Settings.settings.nextUploadDirection = $("#sr input")[0].checked ? -1:1;
         Settings.settings.skipUploadAfterRate = $("#sr input")[1].checked;
+        //#endregion
+        
+        //#region Others
         Settings.settings.autoRateSkippedUploads = false;
+        //#endregion
+
+        //#region Notification
         Settings.settings.activateNotifications = $("#nf input")[0].checked;
         Settings.settings.notificationColor = $("#nf input")[1].value;
         Settings.settings.notificationDuration = Number($("#nf input")[2].value);
-        $("#notificationbox").css("background", Settings.settings.notificationColor);
-        var r = parseInt(Settings.settings.notificationColor.substr(1, 2), 16);
-        var g = parseInt(Settings.settings.notificationColor.substr(3, 2), 16);
-        var b = parseInt(Settings.settings.notificationColor.substr(5, 2), 16);
-        var yiq = ((r * 299) + (g * 587) + (b * 114)) / 1000;
-        $("#notificationbox").css("color", (yiq >= 128) ? 'black' : 'white');
+        $("#notificationbox").css("background",Settings.settings.notificationColor);
+
+        var r = parseInt(Settings.settings.notificationColor.substr(1,2),16);
+        var g = parseInt(Settings.settings.notificationColor.substr(3,2),16);
+        var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
+        var yiq = ((r*299)+(g*587)+(b*114))/1000;
+        $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
+        //#endregion
+ 
         Settings.quickSave();
     }
 }
+/* harmony export (immutable) */ __webpack_exports__["a"] = Settings;
+
+
 Settings.settings = {};
-exports.default = Settings;
 
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(0);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(0);
 let filterHTML = __webpack_require__(3);
-class Utils {
-    constructor() {
+
+class Utils
+{
+    constructor()
+    {
         let _this = this;
         this.createFilter();
+
         this.createNotificationbox();
-        window.addEventListener("commentsReady", function () {
+
+        window.addEventListener("commentsReady", function()
+        {
             _this.addBlockTagSign();
-            _this.addBlockUserSign();
+            _this.addBlockUserSign()
         });
-        window.addEventListener("userReady", function () {
-            _this.addBlockUserSign(true);
-        });
+
+        window.addEventListener("userReady", function()
+        {
+            _this.addBlockUserSign(true);  
+        })
     }
-    createFilter() {
+
+    createFilter()
+    {
         $(".filter-setting:last").after(filterHTML);
+
         let filter = $(".filter-setting:last");
-        $("#filter-link").click(function () {
-            if (Settings_1.default.settings.isActive)
+
+        $("#filter-link").click(function()
+        {
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive)
                 filter.addClass("active");
             else
-                filter.removeClass("active");
+                filter.removeClass("active"); 
         });
-        $(".filter-setting:last").click(function () {
-            if ($(".filter-setting:last").hasClass("active")) {
-                Settings_1.default.settings.isActive = false;
+        
+        $(".filter-setting:last").click(function()
+        {
+            if($(".filter-setting:last").hasClass("active"))
+            {
+                __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
                 filter.removeClass("active");
             }
-            else {
-                Settings_1.default.settings.isActive = true;
+            else    
+            {
+                __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
                 filter.addClass("active");
             }
-            Settings_1.default.quickSave();
+            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].quickSave();
         });
     }
-    static createNameTag(element, data) {
+
+    static createNameTag(element, data)
+    {
         let wrapper = document.createElement("span");
         $(wrapper).addClass("tag");
+        
         $(wrapper).text(data);
+    
         let x = document.createElement("a");
-        $(x).href = "#";
+    
+        $(x).href="#";
         $(x).html("&nbsp;&nbsp;x");
-        $(x).css("color", "red");
-        $(x).click(function (e) {
+        $(x).css("color","red");
+    
+        $(x).click(function(e)
+        {
             e.preventDefault();
             $(this).parent().remove();
         });
+    
         wrapper.append(x);
+    
         element.value = "";
+    
         $(element).prev().append(wrapper);
     }
-    createNotificationbox() {
+
+    createNotificationbox()
+    {
         let notificationbox = document.createElement("div");
         $(notificationbox).addClass("selfmade_m0d");
         notificationbox.id = "notificationbox";
         $("body").append(notificationbox);
     }
-    static showNotification(text, location = "") {
+
+    static showNotification(text, location = "")
+    {
         let _this = this;
-        if (Settings_1.default.settings.activateNotifications) {
+        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.activateNotifications)
+        {
             let element = document.createElement("span");
             element.id = "notification";
             $(element).addClass("selfmade_m0d");
             $(element).attr("data-href", location);
             element.innerText = text;
+
+            
             $("#notificationbox").append(element);
             $(element).slideToggle();
-            $("#notificationbox span:not(:last)").animate({
-                bottom: "+=60"
-            });
-            $(element).click(function () {
+            $("#notificationbox span:not(:last)").animate(
+            {
+                bottom: "+=60" 
+            }
+            );
+
+            $(element).click(function()
+            {
                 let location = $(this).attr("data-href");
-                if (location != "") {
-                    Settings_1.default.settings.isActive = false;
-                    Utils.pr0gramm.navigateTo(location, 0);
-                    setTimeout(function () {
-                        Settings_1.default.settings.isActive = true;
-                    }, 10);
+                if(location != "")
+                {
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
+                    Utils.pr0gramm.navigateTo(location,0);
+                    setTimeout(function()
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
+                    },10);
+                   
                 }
-                $(this).animate({
+                $(this).animate(
+                {
                     left: "-300px"
-                }, function () {
-                    this.remove();
+                },function()
+                {
+                    this.remove()
                 });
             });
-            setTimeout(function () {
-                $(element).animate({
+        
+            setTimeout(function()
+            {
+                $(element).animate(
+                {
                     left: "-300px"
-                }, function () {
-                    element.remove();
+                },function()
+                {
+                    element.remove()
                 });
-            }, Settings_1.default.settings.notificationDuration * 1000);
+            },__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.notificationDuration*1000);
         }
     }
-    addBlockTagSign() {
+
+    addBlockTagSign()
+    {
         let blockTagSign = document.createElement("span");
-        blockTagSign.className = "block-tag";
+        blockTagSign.className = "block-tag"
         blockTagSign.innerText = "ø";
-        if ($(".block-tag").length == 0) {
+        if($(".block-tag").length == 0)
+        {
             $(".tag").append(blockTagSign);
             $(".block-tag").css("cursor", "pointer");
-            $(".block-tag").each(function () {
+    
+            $(".block-tag").each(function()
+            {
                 let tmp = $(this).siblings()[0].innerText;
-                if (Settings_1.default.settings.blockedTags.includes(tmp.toLowerCase())) {
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.includes(tmp.toLowerCase()))
+                {
                     $(this).css("color", "red");
-                }
-                else {
+                }   
+                else
+                {
                     $(this).css("color", "#888");
                 }
             });
-            $(".block-tag").click(function () {
+    
+            $(".block-tag").click(function()
+            {
                 let tmp = $(this).siblings()[0].innerText;
-                if ($(this).css("color") == "rgb(255, 0, 0)") {
-                    Settings_1.default.settings.blockedTags.splice(Settings_1.default.settings.blockedTags.indexOf(tmp), 1);
-                    if (Settings_1.default.settings.blockedTags.length > 0)
-                        Settings_1.default.settings.skipUploadByTag = true;
+                if($(this).css("color") == "rgb(255, 0, 0)")
+                {
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.splice(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.indexOf(tmp),1);
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.length > 0)
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByTag  = true;
                     else
-                        Settings_1.default.settings.skipUploadByTag = false;
-                    $(this).css("color", "#888");
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByTag  = false;
+                    $(this).css("color","#888" );
                 }
-                else {
-                    Settings_1.default.settings.blockedTags.push(tmp.toLowerCase());
-                    Settings_1.default.settings.skipUploadByTag = true;
+                else
+                {
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.push(tmp.toLowerCase());
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByTag  = true;
                     $(this).css("color", "red");
                 }
-                Settings_1.default.quickSave();
+                
+                __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].quickSave();
             });
         }
     }
-    addBlockUserSign(userpage = false) {
+    
+    addBlockUserSign(userpage=false)
+    {
         let blockUserSign = document.createElement("span");
         blockUserSign.className = "block-user";
         blockUserSign.innerText = " ø";
-        if ($(".block-user").length == 0) {
-            if (userpage)
+        if($(".block-user").length == 0)
+        {
+            if(userpage)
                 $(".user-head span")[0].before(blockUserSign);
             else
                 $(blockUserSign).insertAfter($(".user:not(.user-mark)"));
+
             $(".block-user").css("cursor", "pointer");
-            if (userpage) {
+            if(userpage)
+            {
                 let text = $(".block-user").parent().text().trim();
                 text = text.substr(0, text.indexOf(" ")).toLowerCase();
-                if (Settings_1.default.settings.blockedUsers.includes(text)) {
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.includes(text))
+                {
                     $(".block-user").css("color", "red");
                 }
-                $(".block-user").click(function () {
+
+                $(".block-user").click(function()
+                {        
                     let user = $(".block-user").parent().text().trim();
                     user = user.trim().substr(0, user.indexOf(" ")).toLowerCase();
-                    if ($(this).css("color") == "rgb(255, 0, 0)") {
-                        Settings_1.default.settings.blockedUsers.splice(Settings_1.default.settings.blockedUsers.indexOf(user), 1);
-                        if (Settings_1.default.settings.blockedUsers.length > 0)
-                            Settings_1.default.settings.skipUploadByUser = true;
+                    if($(this).css("color") == "rgb(255, 0, 0)")
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.splice(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.indexOf(user),1);
+                        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.length > 0)
+                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = true;
                         else
-                            Settings_1.default.settings.skipUploadByUser = false;
-                        $(this).css("color", "");
+                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = false;
+                        $(this).css("color","" );
                     }
-                    else {
-                        Settings_1.default.settings.blockedUsers.push(user.toLowerCase());
-                        Settings_1.default.settings.skipUploadByUser = true;
+                    else
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.push(user.toLowerCase());
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = true;
                         $(this).css("color", "red");
-                    }
-                    Settings_1.default.quickSave();
+                    }      
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].quickSave();
                 });
             }
-            else {
-                $(".block-user").each(function () {
-                    if (Settings_1.default.settings.blockedUsers.includes($(this).prev()[0].innerText.toLowerCase())) {
+            else
+            {
+                $(".block-user").each(function()
+                {
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.includes($(this).prev()[0].innerText.toLowerCase()))
+                    {
                         $(this).css("color", "red");
                     }
                 });
-                $(".block-user").click(function () {
+                
+                $(".block-user").click(function()
+                {
                     let user = $(this).prev()[0].innerText;
-                    if ($(this).css("color") == "rgb(255, 0, 0)") {
-                        Settings_1.default.settings.blockedUsers.splice(Settings_1.default.settings.blockedUsers.indexOf(user), 1);
-                        if (Settings_1.default.settings.blockedUsers.length > 0)
-                            Settings_1.default.settings.skipUploadByUser = true;
+        
+                    if($(this).css("color") == "rgb(255, 0, 0)")
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.splice(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.indexOf(user),1);
+                        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.length > 0)
+                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = true;
                         else
-                            Settings_1.default.settings.skipUploadByUser = false;
-                        $(this).css("color", "");
+                            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = false;
+                        $(this).css("color","" );
                     }
-                    else {
-                        Settings_1.default.settings.blockedUsers.push(user.toLowerCase());
-                        Settings_1.default.settings.skipUploadByUser = true;
+                    else
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.push(user.toLowerCase());
+                        __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser  = true;
                         $(this).css("color", "red");
-                    }
-                    Settings_1.default.quickSave();
+                    }      
+                    __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].quickSave();
                 });
             }
+    
+            
         }
     }
-    static nextUpload() {
-        if (Settings_1.default.settings.nextUploadDirection == 1) {
+
+    static nextUpload()
+    {
+        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.nextUploadDirection == 1)
+        {
             $(".stream-prev").click();
         }
-        else if (Settings_1.default.settings.nextUploadDirection == -1) {
+        else if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.nextUploadDirection == -1)
+        {
             $(".stream-next").click();
         }
     }
-    static rateUpload(direction = -1) {
+
+    static rateUpload(direction = -1)
+    {
         Utils.showNotification("Upload wurde bewertet");
-        if (direction == 1) {
-            if ($(".item-vote:has(.pict)")[0].className.indexOf("voted-up") == -1)
+        if(direction == 1)
+        {
+            if($(".item-vote:has(.pict)")[0].className.indexOf("voted-up") == -1)
                 $(".item-vote:has(.pict) .vote-up").click();
         }
-        else if (direction == -1) {
-            if ($(".item-vote:has(.pict)")[0].className.indexOf("voted-down") == -1)
+        else if(direction == -1)
+        {
+            if($(".item-vote:has(.pict)")[0].className.indexOf("voted-down") == -1)
                 $(".item-vote:has(.pict) .vote-down").click();
         }
     }
-    static getTags() {
+
+    static getTags()
+    {
         let tags = [];
         let rawTags;
-        if (Settings_1.default.settings.onlyGoodTags == true) {
+    
+        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.onlyGoodTags == true)
+        {
             rawTags = $(".tag-good");
         }
-        else {
+        else
+        {
             rawTags = $(".tag-good,.tag-bad");
         }
-        let amount = Settings_1.default.settings.amountOfTagsChecked;
-        if (amount == -1) {
+
+        let amount = __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.amountOfTagsChecked;
+        if(amount == -1)
+        {
             amount = rawTags.length;
         }
-        else {
-            amount = Math.min(amount, rawTags.length);
+        else
+        {
+            amount = Math.min(amount, rawTags.length)
         }
-        for (let i = 0; i < amount; i++) {
+    
+        for(let i = 0; i <amount; i++)
+        {
             tags.push(rawTags[i].children[0].innerText);
         }
         return tags;
     }
-    static getTotalBenis() {
+
+    static getTotalBenis()
+    {
         let score = $(".item-vote .score");
-        if (score.length != 0) {
+        if(score.length != 0)
+        {
             return $(".item-vote .score")[0].innerText;
         }
         return undefined;
     }
-    static getAverageBenis() {
+    static getAverageBenis()
+    {
         let scoreElement = $(".item-vote .score");
-        if (scoreElement.length != 0) {
+        if(scoreElement.length != 0)
+        {
             let score = $(".item-vote .score")[0].title;
-            let divident = Number(score.substr(0, score.indexOf("u") - 1));
-            let divisor = Number(score.substr(score.indexOf("u") + 4, score.indexOf("u")));
-            if (divisor == 0) {
+            let divident = Number(score.substr(0,score.indexOf("u")-1));
+            let divisor = Number(score.substr(score.indexOf("u")+4,score.indexOf("u")));
+            if(divisor == 0)
+            {
                 return divident;
             }
             return divident / divisor;
         }
-        else
-            undefined;
+        else undefined; 
     }
-    static getUser() {
-        return $(".item-details .user")[0].innerText.toLowerCase();
+
+    static getUser()
+    {
+        return $(".item-details .user")[0].innerText.toLowerCase();        
     }
-    static getUserRank(user) {
+
+    static getUserRank(user)
+    {
         let returnText;
-        switch (user.classList[1]) {
-            case ("um0"):
+        switch(user.classList[1])
+        {
+            case("um0"):
                 returnText = "Schwuchtel";
-                break;
-            case ("um1"):
+            break;
+            case("um1"):
                 returnText = "Neuschwuchtel";
-                break;
-            case ("um2"):
+            break;
+            case("um2"):
                 returnText = "Altschwuchtel";
-                break;
-            case ("um3"):
+            break;
+            case("um3"):
                 returnText = "Administrator";
-                break;
-            case ("um4"):
+            break;
+            case("um4"):
                 returnText = "Gesperrt";
-                break;
-            case ("um5"):
+            break;
+            case("um5"):
                 returnText = "Moderator";
-                break;
-            case ("um6"):
+            break;
+            case("um6"):
                 returnText = "Fliesentischbesitzer";
-                break;
-            case ("um7"):
+            break;
+            case("um7"):
                 returnText = "Lebende Legende";
-                break;
-            case ("um8"):
+            break;
+            case("um8"):
                 returnText = "Wichtler";
-                break;
-            case ("um9"):
+            break;
+            case("um9"):
                 returnText = "Edler Spender";
-                break;
+            break;
             default:
                 returnText = undefined;
-                break;
+            break;
         }
         return returnText;
     }
 }
-Utils.pr0gramm = p;
-exports.default = Utils;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
 
+
+Utils.pr0gramm = p;
 
 /***/ }),
 /* 2 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__EventHandler__ = __webpack_require__(5);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__Settings__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__Modules__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__Keypress__ = __webpack_require__(7);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(0);
-const EventHandler_1 = __webpack_require__(5);
-const Utils_1 = __webpack_require__(1);
-const Modules_1 = __webpack_require__(6);
-const Keypress_1 = __webpack_require__(7);
+
+
+
+
+
+
 __webpack_require__(8);
-class Main {
-    constructor() {
+
+class Main 
+{
+    constructor()
+    {
         console.log("Selfmade M0d running");
-        this.eventHandler = new EventHandler_1.default();
-        this.utils = new Utils_1.default();
-        this.settings = new Settings_1.default();
-        this.modules = new Modules_1.default();
-        this.keypress = new Keypress_1.default();
+       
+        this.eventHandler = new __WEBPACK_IMPORTED_MODULE_0__EventHandler__["a" /* default */](); 
+        this.utils = new __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */]();
+        this.settings = new __WEBPACK_IMPORTED_MODULE_2__Settings__["a" /* default */]();
+        this.modules = new __WEBPACK_IMPORTED_MODULE_3__Modules__["a" /* default */]();
+        this.keypress = new __WEBPACK_IMPORTED_MODULE_4__Keypress__["a" /* default */]();
     }
 }
-$(document).ready(() => new Main());
+
+$(document).ready(()=> new Main());
 
 
 /***/ }),
@@ -636,282 +848,383 @@ module.exports = "<div class=\"form-section selfmade_m0d\">\r\n        <div id=\
 
 /***/ }),
 /* 5 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-class EventHandler {
-    constructor() {
-        this.pr0gramm = p;
+class EventHandler
+{
+    
+
+    constructor()
+    {
         this.keyPress = new Event("keyPress");
         this.settingsReady = new Event("settingsReady");
         this.commentsReady = new Event("commentsReady");
         this.userReady = new Event("userReady");
+        this.pr0gramm = p;
         this.addListener();
     }
-    addListener() {
+
+    addListener()
+    {
         let _this = this;
-        (function (handleKey) {
-            _this.pr0gramm.hotkeys.handleKey = function (code) {
-                handleKey.call(this, code);
+        
+        //keyPress Event
+        (function(handleKey)
+        {
+            _this.pr0gramm.hotkeys.handleKey = function(code)
+            {
+                handleKey.call(this,code);
                 window.dispatchEvent(_this.keyPress);
-            };
+            }
         })(_this.pr0gramm.hotkeys.handleKey);
-        (function (render) {
-            _this.pr0gramm.View.Settings.prototype.render = function (params) {
+        
+        //settingsReady Event
+        (function(render)
+        {
+            _this.pr0gramm.View.Settings.prototype.render = function(params)
+            {
                 render.call(this, params);
                 window.dispatchEvent(_this.settingsReady);
-            };
+            }
         })(_this.pr0gramm.View.Settings.prototype.render);
-        (function (render) {
-            _this.pr0gramm.View.Stream.Comments.prototype.render = function () {
+
+        //commentsReady Event
+        (function(render) 
+        {
+            _this.pr0gramm.View.Stream.Comments.prototype.render = function() {
                 render.call(this);
                 window.dispatchEvent(_this.commentsReady);
             };
         }(_this.pr0gramm.View.Stream.Comments.prototype.render));
-        (function (render) {
-            _this.pr0gramm.View.User.prototype.render = function () {
+
+        //userReady Event
+        (function(render) 
+        {
+            _this.pr0gramm.View.User.prototype.render = function()
+            {
                 render.call(this);
                 window.dispatchEvent(_this.userReady);
-            };
+            }
         })(_this.pr0gramm.View.User.prototype.render);
     }
 }
-exports.default = EventHandler;
+/* harmony export (immutable) */ __webpack_exports__["a"] = EventHandler;
 
 
 /***/ }),
 /* 6 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Settings__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Utils__ = __webpack_require__(1);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Settings_1 = __webpack_require__(0);
-const Utils_1 = __webpack_require__(1);
-class Modules {
-    constructor() {
+
+
+class Modules
+{
+    
+    constructor()
+    {
         this.pr0gramm = p;
         let _this = this;
-        window.addEventListener("commentsReady", function () {
-            setTimeout(function () { _this.executeModules(); }, 10);
+        window.addEventListener("commentsReady", function()
+        {
+            setTimeout(function(){_this.executeModules(); },10);     
         });
     }
-    executeModules() {
+
+    executeModules()
+    {
         let _this = this;
-        if (Settings_1.default.settings.isActive) {
-            let wasSkipped = false;
-            if (Settings_1.default.settings.skipUploadByTag) {
-                wasSkipped = _this.skipUploadByTag();
-            }
-            if (Settings_1.default.settings.skipUploadByUser && !wasSkipped) {
-                wasSkipped = _this.skipUploadByUser();
-            }
-            if (Settings_1.default.settings.skipUploadByTotalBenis && !wasSkipped) {
-                wasSkipped = _this.skipUploadByTotalBenis();
-            }
-            if (Settings_1.default.settings.skipUploadByAverageBenis && !wasSkipped) {
-                wasSkipped = _this.skipUploadByAverageBenis();
-            }
-            if (Settings_1.default.settings.skipUploadByUserRank && !wasSkipped) {
-                wasSkipped = _this.skipUploadByUserRank();
-            }
-            else if (!wasSkipped) {
-                if (Settings_1.default.settings.blockCommentsByUser)
-                    _this.blockCommentsByUser();
-                if (Settings_1.default.settings.blockCommentsByBenis)
-                    _this.blockCommentsByBenis();
-                if (Settings_1.default.settings.skipUploadByUserRank)
-                    _this.blockCommentsByRank();
-                if (Settings_1.default.settings.blockCommentsByBlacklist)
-                    _this.blockCommentsByBlacklist();
-                if (Settings_1.default.settings.collapseTooLongComments)
-                    _this.collapseTooLongComments();
-            }
-        }
-    }
-    skipUploadByTag() {
-        let _this = this;
-        let tags = Utils_1.default.getTags();
-        for (let i = 0; i < tags.length; i++) {
-            if (Settings_1.default.settings.blockedTags.includes(tags[i].toLowerCase())) {
-                if (Settings_1.default.settings.autoRateSkippedUploads) {
-                    Utils_1.default.rateUpload();
+
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive)
+            {
+                let wasSkipped = false;  
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByTag)
+                {
+                    wasSkipped = _this.skipUploadByTag();
                 }
-                Utils_1.default.showNotification("Skipped because of Tag: " + tags[i], this.pr0gramm.location);
-                Utils_1.default.nextUpload();
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser && !wasSkipped)
+                {
+                    wasSkipped = _this.skipUploadByUser();
+                }
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByTotalBenis && !wasSkipped)
+                {
+                    wasSkipped =_this.skipUploadByTotalBenis();
+                }
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByAverageBenis && !wasSkipped)
+                {
+                    wasSkipped = _this.skipUploadByAverageBenis();
+                }
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUserRank && !wasSkipped)
+                {   
+                    wasSkipped = _this.skipUploadByUserRank();
+                }
+                else if(!wasSkipped)
+                {
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockCommentsByUser)
+                        _this.blockCommentsByUser();
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockCommentsByBenis)
+                        _this.blockCommentsByBenis();
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUserRank)
+                        _this.blockCommentsByRank();
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockCommentsByBlacklist)
+                        _this.blockCommentsByBlacklist();
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.collapseTooLongComments)
+                        _this.collapseTooLongComments();
+                }
+            
+            }
+    }
+
+    skipUploadByTag()
+    {
+        let _this = this;
+        let tags = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getTags();
+        for(let i = 0; i < tags.length; i++)
+        {
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedTags.includes(tags[i].toLowerCase()))
+            {
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.autoRateSkippedUploads)
+                {
+                    __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].rateUpload();
+                }
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].showNotification("Skipped because of Tag: " + tags[i], this.pr0gramm.location);
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].nextUpload();
                 return true;
             }
         }
         return false;
     }
-    skipUploadByUser() {
-        let user = Utils_1.default.getUser();
-        if (Settings_1.default.settings.blockedUsers.includes(user)) {
-            if (Settings_1.default.settings.autoRateSkippedUploads)
-                Utils_1.default.rateUpload();
-            Utils_1.default.showNotification("Skipped because of User: " + user, this.pr0gramm.location);
-            Utils_1.default.nextUpload();
+
+    skipUploadByUser()
+    {
+        let user = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getUser();
+        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.includes(user))
+        {
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.autoRateSkippedUploads)
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].rateUpload();
+    
+            __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].showNotification("Skipped because of User: " + user, this.pr0gramm.location);
+            __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].nextUpload();
             return true;
+        }  
+        return false;
+    }
+
+    skipUploadByTotalBenis()
+    { 
+        let score = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getTotalBenis();
+        if(score != undefined)
+        {
+            if(score < __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.minBenis)
+                {   
+                    if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.autoRateSkippedUploads)
+                    {
+                        __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].rateUpload();
+                    }
+                    __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
+                    __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].nextUpload();     
+                    return true;
+                }
         }
         return false;
     }
-    skipUploadByTotalBenis() {
-        let score = Utils_1.default.getTotalBenis();
-        if (score != undefined) {
-            if (score < Settings_1.default.settings.minBenis) {
-                if (Settings_1.default.settings.autoRateSkippedUploads) {
-                    Utils_1.default.rateUpload();
+
+    skipUploadByAverageBenis()
+    {
+        let score = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getAverageBenis();
+        if(score != undefined)
+        {
+            if(__WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getAverageBenis() < __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.minAverageBenis)
+            {   
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.autoRateSkippedUploads)
+                {
+                    __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].rateUpload();
                 }
-                Utils_1.default.showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
-                Utils_1.default.nextUpload();
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].nextUpload();    
                 return true;
             }
         }
         return false;
     }
-    skipUploadByAverageBenis() {
-        let score = Utils_1.default.getAverageBenis();
-        if (score != undefined) {
-            if (Utils_1.default.getAverageBenis() < Settings_1.default.settings.minAverageBenis) {
-                if (Settings_1.default.settings.autoRateSkippedUploads) {
-                    Utils_1.default.rateUpload();
+
+    skipUploadByUserRank()
+    {
+        let rank = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getUserRank($('.item-details .user')[0]);
+        if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUserRanks.includes(rank))
+        {
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.autoRateSkippedUploads)
+                {
+                    __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].rateUpload();
                 }
-                Utils_1.default.showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
-                Utils_1.default.nextUpload();
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
+                __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].nextUpload();    
                 return true;
-            }
         }
         return false;
     }
-    skipUploadByUserRank() {
-        let rank = Utils_1.default.getUserRank($('.item-details .user')[0]);
-        if (Settings_1.default.settings.blockedUserRanks.includes(rank)) {
-            if (Settings_1.default.settings.autoRateSkippedUploads) {
-                Utils_1.default.rateUpload();
-            }
-            Utils_1.default.showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
-            Utils_1.default.nextUpload();
-            return true;
-        }
-        return false;
-    }
-    blockCommentsByUser() {
+
+    blockCommentsByUser()
+    {
         let _this = this;
-        $('.comment:not(textarea)').each(function () {
+        $('.comment:not(textarea)').each(function()
+        {
             let user = $(this).find($('.comment-foot .user'))[0].innerText;
-            if (Settings_1.default.settings.blockedUsers.includes(user)) {
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUsers.includes(user))
+            {
                 _this.blockComment(this, "user: " + user);
             }
         });
     }
-    blockCommentsByBlacklist() {
+
+    blockCommentsByBlacklist()
+    {
         let _this = this;
-        $('.comment .comment-content').each(function () {
+        $('.comment .comment-content').each(function()
+        {
             let element = this;
-            if ($(element).attr("data-comment") != undefined)
+            if($(element).attr("data-comment") != undefined)
                 return;
-            $($(this).text().toLowerCase().replace(/[^\w\s]/g, '').split(" ")).each(function () {
-                if (Settings_1.default.settings.commentBlacklist.includes(String(this))) {
+    
+            $($(this).text().toLowerCase().replace(/[^\w\s]/g, '').split(" ")).each(function()
+            {
+                if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.commentBlacklist.includes(String(this)))
+                {
                     _this.blockComment($(element).parent(), 'word: "' + String(this) + '"');
                     return false;
                 }
             });
         });
     }
-    blockCommentsByBenis() {
+
+    blockCommentsByBenis()
+    {
         let _this = this;
-        $('.comment-foot .score').each(function () {
+        $('.comment-foot .score').each(function()
+        {
             let score = parseFloat(this.innerText);
-            if (score < Settings_1.default.settings.commentMinBenis)
+            if(score < __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.commentMinBenis)
                 _this.blockComment($(this).parent().parent(), "benis too small");
         });
     }
-    blockCommentsByRank() {
+
+    blockCommentsByRank()
+    {
         let _this = this;
-        $('.comment-foot .user').each(function () {
-            let rank = Utils_1.default.getUserRank(this);
-            if (Settings_1.default.settings.blockedUserRanks.includes(rank))
+        $('.comment-foot .user').each(function()
+        {
+            let rank = __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].getUserRank(this);
+            if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockedUserRanks.includes(rank))
                 _this.blockComment($(this).parent().parent(), "rank: " + rank);
         });
     }
-    blockComment(element, text, collapse = true) {
+
+    blockComment(element, text, collapse= true)
+    {
         let tmp = $(element).find($('.comment-content'));
-        if (tmp.attr("data-comment") == undefined) {
+        if(tmp.attr("data-comment") == undefined)
+        {   
             $(tmp).css("color", "grey");
             $(tmp).css("cursor", "pointer");
-            tmp.attr("data-comment", tmp[0].innerHTML);
+            tmp.attr("data-comment", tmp[0].innerHTML )
             tmp[0].innerHTML = "[Blocked] because of " + text;
-            tmp.click(function () {
-                if ($(this).attr("data-comment") != undefined) {
+            tmp.click(function()
+            {
+                if($(this).attr("data-comment") != undefined)
+                {
                     $(this).attr("data-blocked", this.innerHTML);
                     this.innerHTML = $(this).attr("data-comment");
                     $(this).removeAttr("data-comment");
                 }
-                else {
+                else
+                {
                     $(this).attr("data-comment", this.innerHTML);
                     this.innerHTML = $(this).attr("data-blocked");
                     $(this).removeAttr("data-blocked");
                 }
             });
-            if (collapse)
+            if(collapse)
                 $(element).find('.fold-in').click();
         }
     }
-    collapseTooLongComments() {
+
+    collapseTooLongComments()
+    {
         let size = 200;
         let _this = this;
-        $('.comment .comment-content').each(function () {
+        $('.comment .comment-content').each(function()
+        {
             let element = this;
-            if ($(element).attr("data-comment") != undefined)
+            if($(element).attr("data-comment") != undefined)
                 return;
-            if (element.innerText.length > size) {
+    
+            if(element.innerText.length > size)
+            {
                 let tmp = element.innerText.slice(0, size);
-                _this.blockComment($(element).parent(), "", false);
+                _this.blockComment($(element).parent(),"", false);
+                
                 element.innerText = tmp + "...\n[Comment too long, click to expand]";
             }
         });
     }
 }
-exports.default = Modules;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Modules;
 
 
 /***/ }),
 /* 7 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__Utils__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__Settings__ = __webpack_require__(0);
 
-Object.defineProperty(exports, "__esModule", { value: true });
-const Utils_1 = __webpack_require__(1);
-const Settings_1 = __webpack_require__(0);
-class Keypress {
-    constructor() {
-        this.pr0gramm = p;
+
+
+class Keypress
+{
+    constructor()
+    {
         let _this = this;
-        window.addEventListener("keypress", function (e) { _this.shortcuts(e); });
+        window.addEventListener("keypress", function(e){_this.shortcuts(e);})
+        this.pr0gramm = p
     }
-    shortcuts(e) {
-        if ($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT") {
-            if (e.key == "e") {
-                this.pr0gramm.navigateTo("settings/site", 0);
+
+
+    shortcuts(e)
+    {
+        if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
+        {
+            if(e.key == "e")
+            {
+                this.pr0gramm.navigateTo("settings/site",0);
             }
-            else if (e.key == "n") {
-                this.pr0gramm.navigateTo("inbox/all", 0);
+            else if(e.key == "n")
+            {
+                this.pr0gramm.navigateTo("inbox/all",0);
             }
-            else if ($(".item-vote").length > 0) {
-                if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
-                    if (Settings_1.default.settings.skipUploadAfterRate) {
-                        Utils_1.default.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
-                        Utils_1.default.nextUpload();
+
+            else if($(".item-vote").length > 0)
+            {
+                if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
+                {
+                    if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
+                    {
+                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
+                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();    
                     }
                 }
             }
+            
         }
     }
 }
-exports.default = Keypress;
+/* harmony export (immutable) */ __webpack_exports__["a"] = Keypress;
 
 
 /***/ }),
