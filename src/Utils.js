@@ -38,16 +38,8 @@ export default class Utils
         
         $(".filter-setting:last").click(function()
         {
-            if($(".filter-setting:last").hasClass("active"))
-            {
-                Settings.settings.isActive = false;
-                filter.removeClass("active");
-            }
-            else    
-            {
-                Settings.settings.isActive = true;
-                filter.addClass("active");
-            }
+            $(".filter-setting:last").toggleClass("active")
+            Settings.settings.isActive = !Settings.settings.isActive;
             Settings.quickSave();
         });
     }

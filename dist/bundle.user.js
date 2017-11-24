@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.3pre2
+// @version		0.7.4pre
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
@@ -120,16 +120,8 @@ class Utils
         
         $(".filter-setting:last").click(function()
         {
-            if($(".filter-setting:last").hasClass("active"))
-            {
-                __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = false;
-                filter.removeClass("active");
-            }
-            else    
-            {
-                __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = true;
-                filter.addClass("active");
-            }
+            $(".filter-setting:last").toggleClass("active")
+            __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive = !__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive;
             __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].quickSave();
         });
     }
@@ -1231,7 +1223,12 @@ class Keypress
                 $("#stream a:first")[0].click();
             }
 
-            if(e.key == "e")
+            if(e.key == "x")
+            {
+                __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.isActive = !__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.isActive;
+                __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].quickSave();
+            }
+            else if(e.key == "e")
             {
                 this.pr0gramm.navigateTo("settings/site",0);
             }

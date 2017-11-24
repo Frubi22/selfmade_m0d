@@ -36,7 +36,12 @@ export default class Keypress
                 $("#stream a:first")[0].click();
             }
 
-            if(e.key == "e")
+            if(e.key == "x")
+            {
+                Settings.settings.isActive = !Settings.settings.isActive;
+                Settings.quickSave();
+            }
+            else if(e.key == "e")
             {
                 this.pr0gramm.navigateTo("settings/site",0);
             }
