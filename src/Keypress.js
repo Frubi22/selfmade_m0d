@@ -12,20 +12,31 @@ export default class Keypress
 
     shortcuts(e)
     {
-        if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
+        let node;
+        if(e.path != undefined)
+            node = e.path[0].nodeName;
+        else    
+            node = e.target.nodeName;
+
+        if(node != "TEXTAREA" && node != "INPUT")
         {
             if($(".item-vote").length > 0)
             {
-                if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
+                if(e.key == "w" ||   e.key == "g" || e.key == "+" || e.key == "s" || e.key == "-" || e.key == "b" || e.key == "f")
                 {
                     if(Settings.settings.skipUploadAfterRate)
                     {
                         Utils.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
-                        Utils.nextUpload();    
+                        Utils.nextUpload();
                     }
                 }
             }
-            else if(e.key == "e")
+            else if(e.key == "d")
+            {
+                $("#stream a:first")[0].click();
+            }
+
+            if(e.key == "e")
             {
                 this.pr0gramm.navigateTo("settings/site",0);
             }

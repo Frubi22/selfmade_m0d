@@ -152,7 +152,7 @@ export default class Modules
         let _this = this;
         $('.comment:not(textarea)').each(function()
         {
-            let user = $(this).find($('.comment-foot .user'))[0].innerText;
+            let user = $(this).find($('.comment-foot .user'))[0].innerText.toLowerCase();
             if(Settings.settings.blockedUsers.includes(user))
             {
                 _this.blockComment(this, "user: " + user);
