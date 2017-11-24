@@ -5,7 +5,7 @@
 // @include		*://pr0gramm.com/*
 // @grant       none
 // @version		0.7.1
-// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
+// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
@@ -764,8 +764,8 @@ class Modules {
                 if (Settings_1.default.settings.autoRateSkippedUploads) {
                     Utils_1.default.rateUpload();
                 }
-                Utils_1.default.nextUpload();
                 Utils_1.default.showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
+                Utils_1.default.nextUpload();
                 return true;
             }
         }
@@ -778,8 +778,8 @@ class Modules {
                 if (Settings_1.default.settings.autoRateSkippedUploads) {
                     Utils_1.default.rateUpload();
                 }
-                Utils_1.default.nextUpload();
                 Utils_1.default.showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
+                Utils_1.default.nextUpload();
                 return true;
             }
         }
@@ -791,8 +791,8 @@ class Modules {
             if (Settings_1.default.settings.autoRateSkippedUploads) {
                 Utils_1.default.rateUpload();
             }
-            Utils_1.default.nextUpload();
             Utils_1.default.showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
+            Utils_1.default.nextUpload();
             return true;
         }
         return false;
