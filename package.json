@@ -1,0 +1,25 @@
+{
+  "name": "selfmade_m0d",
+  "version": "0.7.0",
+  "scripts": {
+    "build": "webpack --watch",
+    "test": "webpack"
+  },
+  "author": "Frubi",
+  "license": "MIT",
+  "description": "",
+  "devDependencies": {
+    "@types/jquery": "^3.2.16",
+    "@types/less": "0.0.32",
+    "@types/requirejs": "^2.1.31",
+    "css-loader": "^0.28.7",
+    "html-loader": "^0.5.1",
+    "jquery": "^3.2.1",
+    "less": "^2.7.3",
+    "less-loader": "^4.0.5",
+    "style-loader": "^0.19.0",
+    "ts-loader": "^3.1.1",
+    "typescript": "^2.6.1",
+    "webpack": "^3.8.1"
+  }
+}

@@ -1,0 +1,82 @@
+<div class="form-section selfmade_m0d">
+        <div id="bt">
+            Geblockte Tags:<br>
+            <div class="tag-container"></div>
+            <input placeholder="tag1,tag2,tag3,..." title="Tags mit Komma trennen!"></input>
+            <input type="checkbox" class="box-from-label" name="onlyGoodTags">
+                <label for="onlyGoodTags"> Ignoriere Tags mit negativen Benis </label>
+            Anzahl der zu berücksichtigen Tags: <input type="number" min="-1" max="999" value="-1" title="-1 = alle">
+        </div>
+        <br><hr />
+        <div id="bu" title="Nutzernamen mit Komma trennen!">
+            Geblockte Nutzer:<br>
+            <div class="tag-container"></div>
+            <input placeholder="nutzer1,nutzer2,nutzer3,..."></input>
+            <input type="checkbox" class="box-from-label" name="bc">
+                <label for="bc"> Kommentare von geblockten Nutzern entfernen</label>
+        </div>
+        <br><hr/>
+        <div id="bc">
+            Geblockte Wörter in den Kommentaren:<br>
+            <div class="tag-container"></div>
+            <input placeholder="wort1,wort2,wort3,..." title="Wörter mit Komma trennen!"></input><br>
+            <input type="checkbox" class="box-from-label" name="ComMinBenis">
+                <label for="ComMinBenis" style="display:inline-block"> Mindest Benis bei Kommentaren:</label> <input type="number" min="-999" max="999" value="0">
+            <input type="checkbox" class="box-from-label" name="shortComms" /> <label for="shortComms"> Zu lange Kommentare kürzen</label>
+        </div>
+        <br><hr/>
+        <div id="br" >
+            Geblockte Ränge:<br>
+            <div style="margin-left:25px;">
+                <input type="checkbox" class="box-from-label" name="Neuschwuchtel">
+                    <label for="Neuschwuchtel" style="color:#E108E9" >Neuschwuchtel</label>
+                <input type="checkbox" class="box-from-label" name="Schwuchtel">
+                    <label for="Schwuchtel" style="color:#FFFFFF">Schwuchtel</label>
+                <input type="checkbox" class="box-from-label" name="Altschwuchtel">
+                    <label for="Altschwuchtel" style="color:#5BB91C"> Altschwuchtel</label>
+                <input type="checkbox" class="box-from-label" name="Wichtler">
+                    <label for="Wichtler" style="color:#D23C22"> Wichtler</label>
+                <input type="checkbox" class="box-from-label" name="Edler Spender">
+                    <label for="Edler Spender" style="color:#1cb992"> Edler Spender</label>
+                <input type="checkbox" class="box-from-label" name="Gesperrt">
+                    <label for="Gesperrt" style="color:#444444"> Gesperrt </label>
+                <input type="checkbox" class="box-from-label" name="Fliesentischbesitzer">
+                    <label for="Fliesentischbesitzer" style="color:#6C432B"> Fliesentischbesitzer</label>
+                <input type="checkbox" class="box-from-label" name="Lebende Legende">
+                    <label for="Lebende Legende" style="color:#1cb992"> Lebende Legende</label>
+                <input type="checkbox" class="box-from-label" name="Moderator">
+                    <label for="Moderator" style="color:#008FFF"> Moderator</label>
+                <input type="checkbox" class="box-from-label" name="Administrator">
+                    <label for="Administrator" style="color:#FF9900"> Administrator</label>
+            </div>	
+        </div>
+        <br><hr/>
+        <div id="mb" >
+            <input type="checkbox" class="box-from-label" name="minBenis" >
+                <label for="minBenis" style="display:inline-block">Mindest Benis: </label><input type="number" min="-999" max="999" value="0"><br>
+            <input type="checkbox" class="box-from-label" name="minAverageBenis" >
+                <label for="minAverageBenis" style="display:inline-block"> Mindest Durchschnittsbenis: </label><input type="number" min="-999" max="999" value="0">
+        </div>
+        <br><hr/>
+        <div id="sr" >
+            <input type="checkbox" class="box-from-label" name="sd">
+                <label for="sd"> Nach rechts Skippen</label>
+            <input type="checkbox" class="box-from-label" name="sar">
+                <label for="sar"> Nach Bewertung skippen</label>
+        </div>
+        <br><hr>
+        <div id="nf">
+            <input type="checkbox" class="box-from-label" name="notification">
+                <label for="notification">Notifications anzeigen</label>
+            Notificationsfarbe: <input type="color" id="color"><br>
+            Notificationdauer in Sekunden: <input type="number">
+        </div>
+        <br>
+        <div id="save">
+            <input type="submit" value="Speichern" class="confirm settings-save"></input>
+        </div>
+        <br>
+        <div id="reset">
+            <a class="action clear-settings-button">Einstellungen zurücksetzen</a>
+        </div>
+    </div>
