@@ -4,7 +4,8 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.0
+// @version		1.7.0Beta
+// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -598,8 +599,8 @@ const Settings_1 = __webpack_require__(0);
 const EventHandler_1 = __webpack_require__(5);
 const Utils_1 = __webpack_require__(1);
 const Modules_1 = __webpack_require__(6);
-const Keypress_1 = __webpack_require__(12);
-__webpack_require__(7);
+const Keypress_1 = __webpack_require__(7);
+__webpack_require__(8);
 class Main {
     constructor() {
         console.log("Selfmade M0d running");
@@ -868,10 +869,43 @@ exports.default = Modules;
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+const Utils_1 = __webpack_require__(1);
+const Settings_1 = __webpack_require__(0);
+class Keypress {
+    constructor() {
+        this.pr0gramm = p;
+        let _this = this;
+        window.addEventListener("keypress", function (e) { _this.manageKeypress(e); });
+    }
+    manageKeypress(e) {
+        if (e.key == "e") {
+            this.pr0gramm.navigateTo("settings/site", 0);
+        }
+        if (e.key == "n") {
+            this.pr0gramm.navigateTo("inbox/all", 0);
+        }
+        if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
+            if (Settings_1.default.settings.skipUploadAfterRate) {
+                Utils_1.default.nextUpload();
+                Utils_1.default.showNotification("Skipped because of: User ranked");
+            }
+        }
+    }
+}
+exports.default = Keypress;
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(8);
+var content = __webpack_require__(9);
 if(typeof content === 'string') content = [[module.i, content, '']];
 // Prepare cssTransformation
 var transform;
@@ -879,7 +913,7 @@ var transform;
 var options = {"hmr":true}
 options.transform = transform
 // add the styles to the DOM
-var update = __webpack_require__(10)(content, options);
+var update = __webpack_require__(11)(content, options);
 if(content.locals) module.exports = content.locals;
 // Hot Module Replacement
 if(false) {
@@ -896,10 +930,10 @@ if(false) {
 }
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(9)(undefined);
+exports = module.exports = __webpack_require__(10)(undefined);
 // imports
 
 
@@ -910,7 +944,7 @@ exports.push([module.i, ".selfmade_m0d .tag-container {\n  margin-top: 5px;\n}\n
 
 
 /***/ }),
-/* 9 */
+/* 10 */
 /***/ (function(module, exports) {
 
 /*
@@ -992,7 +1026,7 @@ function toComment(sourceMap) {
 
 
 /***/ }),
-/* 10 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /*
@@ -1048,7 +1082,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(11);
+var	fixUrls = __webpack_require__(12);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -1364,7 +1398,7 @@ function updateLink (link, options, obj) {
 
 
 /***/ }),
-/* 11 */
+/* 12 */
 /***/ (function(module, exports) {
 
 
@@ -1456,40 +1490,6 @@ module.exports = function (css) {
 	// send back the fixed css
 	return fixedCss;
 };
-
-
-/***/ }),
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-const Utils_1 = __webpack_require__(1);
-const Settings_1 = __webpack_require__(0);
-class Keypress {
-    constructor() {
-        this.pr0gramm = p;
-        let _this = this;
-        window.addEventListener("keypress", function (e) { _this.manageKeypress(e); });
-    }
-    manageKeypress(e) {
-        console.log(e);
-        if (e.key == "e") {
-            this.pr0gramm.navigateTo("settings/site", 0);
-        }
-        if (e.key == "n") {
-            this.pr0gramm.navigateTo("inbox/all", 0);
-        }
-        if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
-            if (Settings_1.default.settings.skipUploadAfterRate) {
-                Utils_1.default.nextUpload();
-                Utils_1.default.showNotification("Skipped because of: User ranked");
-            }
-        }
-    }
-}
-exports.default = Keypress;
 
 
 /***/ })
