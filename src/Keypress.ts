@@ -14,20 +14,23 @@ export default class Keypress
     private manageKeypress(e:any):void
     {
         console.log(e);
-        if(e.key == "e")
+        if((<any>$(e.path[0])).nodeName != "TEXTAREA" && (<any>$(e.path[0])).nodeName != "INPUT")
         {
-            this.pr0gramm.navigateTo("settings/site",0);
-        }
-        if(e.key == "n")
-        {
-            this.pr0gramm.navigateTo("inbox/all",0);
-        }
-        if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
-        {
-            if(Settings.settings.skipUploadAfterRate)
+            if(e.key == "e")
             {
-                Utils.nextUpload();
-                Utils.showNotification("Skipped because of: User ranked");
+                this.pr0gramm.navigateTo("settings/site",0);
+            }
+            if(e.key == "n")
+            {
+                this.pr0gramm.navigateTo("inbox/all",0);
+            }
+            if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
+            {
+                if(Settings.settings.skipUploadAfterRate)
+                {
+                    Utils.nextUpload();
+                    Utils.showNotification("Skipped because of: User ranked");
+                }
             }
         }
     }

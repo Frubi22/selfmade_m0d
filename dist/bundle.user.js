@@ -886,16 +886,18 @@ class Keypress {
     }
     manageKeypress(e) {
         console.log(e);
-        if (e.key == "e") {
-            this.pr0gramm.navigateTo("settings/site", 0);
-        }
-        if (e.key == "n") {
-            this.pr0gramm.navigateTo("inbox/all", 0);
-        }
-        if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
-            if (Settings_1.default.settings.skipUploadAfterRate) {
-                Utils_1.default.nextUpload();
-                Utils_1.default.showNotification("Skipped because of: User ranked");
+        if ($(e.path[0]).nodeName != "TEXTAREA" && $(e.path[0]).nodeName != "INPUT") {
+            if (e.key == "e") {
+                this.pr0gramm.navigateTo("settings/site", 0);
+            }
+            if (e.key == "n") {
+                this.pr0gramm.navigateTo("inbox/all", 0);
+            }
+            if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
+                if (Settings_1.default.settings.skipUploadAfterRate) {
+                    Utils_1.default.nextUpload();
+                    Utils_1.default.showNotification("Skipped because of: User ranked");
+                }
             }
         }
     }
