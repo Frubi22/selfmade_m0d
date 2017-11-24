@@ -138,7 +138,7 @@ export default class Utils
                 left: "-300px"
             },function()
             {
-                this.remove()
+                element.remove()
             });
     }
 
