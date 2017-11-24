@@ -885,6 +885,7 @@ class Keypress {
         window.addEventListener("keypress", function (e) { _this.manageKeypress(e); });
     }
     manageKeypress(e) {
+        console.log(e);
         if (e.key == "e") {
             this.pr0gramm.navigateTo("settings/site", 0);
         }

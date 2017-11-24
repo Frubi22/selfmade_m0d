@@ -13,6 +13,7 @@ export default class Keypress
 
     private manageKeypress(e:any):void
     {
+        console.log(e);
         if(e.key == "e")
         {
             this.pr0gramm.navigateTo("settings/site",0);
