@@ -1,6 +1,10 @@
 {
   "name": "selfmade_m0d",
+<<<<<<< HEAD
   "version": "0.7.2",
+=======
+  "version": "0.7.3pre2",
+>>>>>>> testing
   "scripts": {
     "build": "webpack --watch",
     "test": "webpack"
