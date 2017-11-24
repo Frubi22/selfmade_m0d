@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.2pre6
+// @version		0.7.3pre
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
@@ -1205,21 +1205,11 @@ class Keypress
         this.pr0gramm = p
     }
 
-
     shortcuts(e)
     {
         if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
         {
-            if(e.key == "e")
-            {
-                this.pr0gramm.navigateTo("settings/site",0);
-            }
-            else if(e.key == "n")
-            {
-                this.pr0gramm.navigateTo("inbox/all",0);
-            }
-
-            else if($(".item-vote").length > 0)
+            if($(".item-vote").length > 0)
             {
                 if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
                 {
@@ -1230,7 +1220,29 @@ class Keypress
                     }
                 }
             }
-            
+            else if(e.key == "e")
+            {
+                this.pr0gramm.navigateTo("settings/site",0);
+            }
+            else if(e.key == "n")
+            {
+                this.pr0gramm.navigateTo("inbox/all",0);
+            }
+            else if(e.key == "1")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("new/",0);
+            }
+            else if(e.key == "2")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("top/",0);
+            }
+            else if(e.key == "1")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("stalk/",0);
+            } 
         }
     }
 }

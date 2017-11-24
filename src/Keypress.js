@@ -10,21 +10,11 @@ export default class Keypress
         this.pr0gramm = p
     }
 
-
     shortcuts(e)
     {
         if($(e.path)[0].nodeName != "TEXTAREA" && $(e.path)[0].nodeName != "INPUT")
         {
-            if(e.key == "e")
-            {
-                this.pr0gramm.navigateTo("settings/site",0);
-            }
-            else if(e.key == "n")
-            {
-                this.pr0gramm.navigateTo("inbox/all",0);
-            }
-
-            else if($(".item-vote").length > 0)
+            if($(".item-vote").length > 0)
             {
                 if(e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b")
                 {
@@ -35,7 +25,29 @@ export default class Keypress
                     }
                 }
             }
-            
+            else if(e.key == "e")
+            {
+                this.pr0gramm.navigateTo("settings/site",0);
+            }
+            else if(e.key == "n")
+            {
+                this.pr0gramm.navigateTo("inbox/all",0);
+            }
+            else if(e.key == "1")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("new/",0);
+            }
+            else if(e.key == "2")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("top/",0);
+            }
+            else if(e.key == "1")
+            {
+                e.preventDefault();
+                this.pr0gramm.navigateTo("stalk/",0);
+            } 
         }
     }
 }
