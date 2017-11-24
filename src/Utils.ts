@@ -1,8 +1,10 @@
 import Settings from "./Settings";
 let filterHTML = require("./template/filter.html");
+declare let p:any;
 
 export default class Utils
 {
+    private static pr0gramm = p;
     constructor()
     {
         let _this = this;
@@ -86,14 +88,18 @@ export default class Utils
         $("body").append(notificationbox);
     }
 
-    public static showNotification(text:String)
+    public static showNotification(text:String, location:string = "")
     {
+        let _this = this;
         if(Settings.settings.activateNotifications)
         {
             let element = document.createElement("span");
             element.id = "notification";
             $(element).addClass("selfmade_m0d");
+            $(element).attr("data-href", location);
             (<any>element).innerText = text;
+
+            
             $("#notificationbox").append(element);
             $(element).slideToggle();
             $("#notificationbox span:not(:last)").animate(
@@ -104,13 +110,13 @@ export default class Utils
 
             $(element).click(function()
             {
-                $(this).animate(
+                let location = $(this).attr("data-href");
+                if(location != "")
                 {
-                    left: "-300px"
-                },function()
-                {
-                    this.remove()
-                });
+                    Settings.settings.isActive = false;
+                    Utils.pr0gramm.navigateTo(location,0);
+                    Settings.settings.isActive = true;
+                }
             });
         
             setTimeout(function()
