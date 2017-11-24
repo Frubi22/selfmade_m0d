@@ -4,8 +4,9 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.1pre2
+// @version		0.7.1
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
+// @namespace   https://github.com/Frubi22/selfmade_m0d
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
@@ -492,9 +493,7 @@ class Utils {
             $(".stream-prev").click();
         }
         else if (Settings_1.default.settings.nextUploadDirection == -1) {
-            setTimeout(function () {
-                $(".stream-next").click();
-            }, 10);
+            $(".stream-next").click();
         }
     }
     static rateUpload(direction = -1) {
@@ -904,8 +903,8 @@ class Keypress {
             else if ($(".item-vote").length > 0) {
                 if (e.key == "w" || e.key == "s" || e.key == "f" || e.key == "g" || e.key == "+" || e.key == "-" || e.key == "b") {
                     if (Settings_1.default.settings.skipUploadAfterRate) {
-                        Utils_1.default.nextUpload();
                         Utils_1.default.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
+                        Utils_1.default.nextUpload();
                     }
                 }
             }

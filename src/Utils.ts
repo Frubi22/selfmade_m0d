@@ -279,10 +279,7 @@ export default class Utils
         }
         else if(Settings.settings.nextUploadDirection == -1)
         {
-            setTimeout(function()
-            {
-                $(".stream-next").click();
-            },10);
+            $(".stream-next").click();
         }
     }
 

@@ -30,8 +30,8 @@ export default class Keypress
                 {
                     if(Settings.settings.skipUploadAfterRate)
                     {
-                        Utils.nextUpload();
                         Utils.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
+                        Utils.nextUpload();    
                     }
                 }
             }

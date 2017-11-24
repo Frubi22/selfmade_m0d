@@ -104,8 +104,8 @@ export default class Modules
                     {
                         Utils.rateUpload();
                     }
-                    Utils.nextUpload();
                     Utils.showNotification("Skipped because of Benis: " + score, this.pr0gramm.location);
+                    Utils.nextUpload();     
                     return true;
                 }
         }
@@ -123,8 +123,8 @@ export default class Modules
                 {
                     Utils.rateUpload();
                 }
-                Utils.nextUpload();
                 Utils.showNotification("Skipped because of average Benis: " + score, this.pr0gramm.location);
+                Utils.nextUpload();    
                 return true;
             }
         }
@@ -140,8 +140,8 @@ export default class Modules
                 {
                     Utils.rateUpload();
                 }
-                Utils.nextUpload();
                 Utils.showNotification("Skipped because of Userrank: " + rank, this.pr0gramm.location);
+                Utils.nextUpload();    
                 return true;
         }
         return false;
