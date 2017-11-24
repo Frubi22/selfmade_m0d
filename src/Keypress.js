@@ -36,17 +36,17 @@ export default class Keypress
             else if(e.key == "1")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("new/",0);
+                this.pr0gramm.navigateTo("new",0);
             }
             else if(e.key == "2")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("top/",0);
+                this.pr0gramm.navigateTo("top",0);
             }
             else if(e.key == "1")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("stalk/",0);
+                this.pr0gramm.navigateTo("stalk",0);
             } 
         }
     }

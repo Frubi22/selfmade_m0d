@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.3pre
+// @version		0.7.3pre1
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d testing
@@ -1231,17 +1231,17 @@ class Keypress
             else if(e.key == "1")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("new/",0);
+                this.pr0gramm.navigateTo("new",0);
             }
             else if(e.key == "2")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("top/",0);
+                this.pr0gramm.navigateTo("top",0);
             }
             else if(e.key == "1")
             {
                 e.preventDefault();
-                this.pr0gramm.navigateTo("stalk/",0);
+                this.pr0gramm.navigateTo("stalk",0);
             } 
         }
     }
