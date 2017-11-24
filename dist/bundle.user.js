@@ -4,17 +4,10 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-<<<<<<< HEAD
-// @version		0.7.2
+// @version		0.7.3
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
-=======
-// @version		0.7.3pre2
-// @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
-// @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/testing/dist/bundle.user.js
-// @namespace   https://github.com/Frubi22/selfmade_m0d testing
->>>>>>> testing
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
 /******/ 	// The module cache
