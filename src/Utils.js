@@ -116,18 +116,18 @@ export default class Utils
                         Settings.settings.isActive = true;
                     },10); 
                 }
-                removeNotification(this);
+                this.removeNotification(this);
             });
 
             $(element).contextmenu(function()
             {
-                removeNotification(this);
+                this.removeNotification(this);
                 return false;
             });
         
             setTimeout(function()
             {
-                removeNotification(element);
+                this.removeNotification(element);
             },Settings.settings.notificationDuration*1000);
         }
     }
