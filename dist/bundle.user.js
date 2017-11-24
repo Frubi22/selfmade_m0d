@@ -4,7 +4,7 @@
 // @description:de	(Beta) Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.0
+// @version		0.7.1pre
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // ==/UserScript==
 /******/ (function(modules) { // webpackBootstrap
@@ -354,11 +354,13 @@ class Utils {
         notificationbox.id = "notificationbox";
         $("body").append(notificationbox);
     }
-    static showNotification(text) {
+    static showNotification(text, location = "") {
+        let _this = this;
         if (Settings_1.default.settings.activateNotifications) {
             let element = document.createElement("span");
             element.id = "notification";
             $(element).addClass("selfmade_m0d");
+            $(element).attr("data-href", location);
             element.innerText = text;
             $("#notificationbox").append(element);
             $(element).slideToggle();
@@ -366,11 +368,12 @@ class Utils {
                 bottom: "+=60"
             });
             $(element).click(function () {
-                $(this).animate({
-                    left: "-300px"
-                }, function () {
-                    this.remove();
-                });
+                let location = $(this).attr("data-href");
+                if (location != "") {
+                    Settings_1.default.settings.isActive = false;
+                    Utils.pr0gramm.navigateTo(location, 0);
+                    Settings_1.default.settings.isActive = true;
+                }
             });
             setTimeout(function () {
                 $(element).animate({
@@ -585,6 +588,7 @@ class Utils {
         return returnText;
     }
 }
+Utils.pr0gramm = p;
 exports.default = Utils;
 
 
