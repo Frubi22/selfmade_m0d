@@ -43,7 +43,7 @@ export default class Keypress
                 e.preventDefault();
                 this.pr0gramm.navigateTo("top",0);
             }
-            else if(e.key == "1")
+            else if(e.key == "3")
             {
                 e.preventDefault();
                 this.pr0gramm.navigateTo("stalk",0);
