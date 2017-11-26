@@ -198,7 +198,12 @@ export default class Utils
         if($(".block-user").length == 0)
         {
             if(userpage)
+            {
+                if($(".user-head span")[0] == undefined)
+                    return;
                 $(".user-head span")[0].before(blockUserSign);
+            }
+                
             else
                 $(blockUserSign).insertAfter($(".user:not(.user-mark)"));
 
