@@ -92,10 +92,6 @@ export default class Utils
 
             $("#notificationbox").append(element);
             $(element).slideToggle();
-            $("#notificationbox span:not(:last)").animate(
-            {
-                bottom: "+=60" 
-            });
 
             $(element).click(function(e)
             {
