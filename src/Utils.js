@@ -14,6 +14,7 @@ export default class Utils
         {
             _this.addBlockTagSign();
             _this.addBlockUserSign()
+            _this.getRating();
         });
 
         window.addEventListener("userReady", function()
@@ -400,6 +401,12 @@ export default class Utils
         }
         return returnText;
     }
+
+    getRating()
+    {
+        Utils.rating = $(".item-vote")[0].className;
+    }
 }
 
 Utils.pr0gramm = p;
+Utils.rating;

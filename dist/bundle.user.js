@@ -96,6 +96,7 @@ class Utils
         {
             _this.addBlockTagSign();
             _this.addBlockUserSign()
+            _this.getRating();
         });
 
         window.addEventListener("userReady", function()
@@ -482,11 +483,17 @@ class Utils
         }
         return returnText;
     }
+
+    getRating()
+    {
+        Utils.rating = $(".item-vote")[0].className;
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
 
 
 Utils.pr0gramm = p;
+Utils.rating;
 
 /***/ }),
 /* 1 */
@@ -1229,12 +1236,36 @@ class Keypress
         {
             if($(".item-vote").length > 0)
             {
-                if(e.key == "w" ||   e.key == "g" || e.key == "+" || e.key == "s" || e.key == "-" || e.key == "b" || e.key == "f")
+                if(e.key == "w" ||   e.key == "g" || e.key == "+" || e.key == "f")
                 {
-                    if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
+                    if(__WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].rating.includes("voted-up"))
                     {
-                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
-                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();
+                        $(".item-vote .pict.vote-up").click();
+                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].rating = $(".item-vote")[0].className;
+                    }
+                    else
+                    {
+                        if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
+                        {
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because the you rated positive", this.pr0gramm.getLocation());
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();
+                        }
+                    }     
+                }
+                else if(e.key == "s" || e.key == "-" || e.key == "b")
+                {
+                    if(__WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].rating.includes("voted-down"))
+                    {
+                        $(".item-vote .pict.vote-down").click();
+                        __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].rating = $(".item-vote")[0].className;                        
+                    }
+                    else
+                    {
+                        if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
+                        {
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because the you rated negative", this.pr0gramm.getLocation());
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();
+                        }
                     }
                 }
             }
