@@ -41,9 +41,6 @@ export default class Settings
         window.addEventListener("settingsReady", function(){_this.addSettingsTab()});
         if(window.location.href.includes("Selfmade_M0d")){this.pr0gramm.navigateTo("settings/site",0);}
     } 
- 
-
-    
 
     readSettings()
     {
@@ -98,7 +95,14 @@ export default class Settings
         $(".selfmade_m0d").addClass("active");
         
         $(".pane.form-page")[0].innerHTML = settingsPageContent;
-    
+        
+        $(".tablinks").click(function(e)
+        {
+            _this.changeSettingsContent(e, this);
+        });
+
+        $(".tablinks#default").click();
+
         //#region Blocked Tags
         Settings.settings.blockedTags.forEach(function(e)
         {
@@ -166,7 +170,7 @@ export default class Settings
         $("#bc input")[3].checked = Settings.settings.collapseTooLongComments;
         //#endregion
 
-        //#region Blocked Usersranks
+        //#region Blocked Userranks
         Settings.settings.blockedUserRanks.forEach(function(e)
         {
             let tmp = $("label:contains(" + e + ")");
@@ -295,6 +299,22 @@ export default class Settings
         //#endregion
  
         Settings.quickSave();
+    }
+
+    changeSettingsContent(evt, element)
+    {
+        $(".tabcontent").each(function()
+        {
+           this.style.display = "none"; 
+        });
+
+        $(".tablinks").each(function()
+        {
+           $(this).removeClass("active"); 
+        });
+        $("#" + $(element).attr("data-tab"))[0].style.display = "block";
+
+        $(element).addClass("active");
     }
 }
 
