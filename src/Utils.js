@@ -14,6 +14,7 @@ export default class Utils
         {
             _this.addBlockTagSign();
             _this.addBlockUserSign()
+            _this.getRating();
         });
 
         window.addEventListener("userReady", function()
@@ -38,16 +39,8 @@ export default class Utils
         
         $(".filter-setting:last").click(function()
         {
-            if($(".filter-setting:last").hasClass("active"))
-            {
-                Settings.settings.isActive = false;
-                filter.removeClass("active");
-            }
-            else    
-            {
-                Settings.settings.isActive = true;
-                filter.addClass("active");
-            }
+            $(".filter-setting:last").toggleClass("active")
+            Settings.settings.isActive = !Settings.settings.isActive;
             Settings.quickSave();
         });
     }
@@ -99,10 +92,6 @@ export default class Utils
 
             $("#notificationbox").append(element);
             $(element).slideToggle();
-            $("#notificationbox span:not(:last)").animate(
-            {
-                bottom: "+=60" 
-            });
 
             $(element).click(function(e)
             {
@@ -205,7 +194,12 @@ export default class Utils
         if($(".block-user").length == 0)
         {
             if(userpage)
+            {
+                if($(".user-head span")[0] == undefined)
+                    return;
                 $(".user-head span")[0].before(blockUserSign);
+            }
+                
             else
                 $(blockUserSign).insertAfter($(".user:not(.user-mark)"));
 
@@ -408,6 +402,12 @@ export default class Utils
         }
         return returnText;
     }
+
+    getRating()
+    {
+        Utils.rating = $(".item-vote")[0].className;
+    }
 }
 
 Utils.pr0gramm = p;
+Utils.rating;

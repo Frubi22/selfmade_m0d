@@ -1,12 +1,12 @@
 {
   "name": "selfmade_m0d",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "scripts": {
     "build": "webpack --watch",
     "test": "webpack"
   },
   "author": "Frubi",
-  "license": "MIT",
+  "license": "GNU GPLv3",
   "description": "",
   "devDependencies": {
     "@types/jquery": "^3.2.16",

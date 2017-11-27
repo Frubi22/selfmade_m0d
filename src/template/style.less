@@ -1,38 +1,83 @@
 .selfmade_m0d
 {
-    .tag-container
-    {
-        margin-top:5px;
-    }
-    #color
-    {
-        padding: 0;
-    }
     &#notificationbox
     {
-        background: #ee4d2e;
+        //background: #ee4d2e;
+        visibility: hidden;
         position:fixed; 
         width:300px; 
         left:0; 
         bottom:0; 
-        z-index:11
-    }
-    hr 
-    {
-        border:solid rgb(143, 140, 140) 0.5px;
+        z-index:11;
+        vertical-align: bottom;
     }
     &#notification   
     {  
+        visibility: visible;
         display:none; 
-        position:absolute;
-        bottom:0; 
-        left:0; 
+        position:relative;
         background: inherit;
         line-height:60px; 
         width:100%; 
         text-align:center; 
         vertical-align:middle;
         color: inherit;
+        cursor: pointer;
+    }
+
+    .tag-container
+    {
+        margin-top:5px;
+        max-height: 100px;
+        overflow: auto;
+    }
+    .tabcontent
+    {
+        display: none;
+        &#shortcuts span 
+        {
+            display: block;
+        }
+        &#credits 
+        {
+            span
+            {
+                display: block;
+            }
+            a:hover
+            {
+                color:white!important;
+            }
+        }
+    }
+    #color
+    {
+        padding: 0;
+    }
+   
+    hr 
+    {
+        border:solid rgb(143, 140, 140) 0.5px;
+    }
+    button
+    {
+        height: 30px;
+        background-color: inherit;
+        float: left;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        margin-bottom: 10px;
+        transition: 0.3s;
+        color:white;
+        &:hover 
+        {
+        background-color:lighten( #161618, 30%);
+        }
+        &.active 
+        {
+        background-color: lighten( #161618, 20%);
+        }
     }
 }
 

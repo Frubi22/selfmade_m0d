@@ -22,12 +22,36 @@ export default class Keypress
         {
             if($(".item-vote").length > 0)
             {
-                if(e.key == "w" ||   e.key == "g" || e.key == "+" || e.key == "s" || e.key == "-" || e.key == "b" || e.key == "f")
+                if(e.key == "w" ||   e.key == "g" || e.key == "+" || e.key == "f")
                 {
-                    if(Settings.settings.skipUploadAfterRate)
+                    if(Utils.rating.includes("voted-up"))
                     {
-                        Utils.showNotification("Skipped because of: User rated", this.pr0gramm.getLocation());
-                        Utils.nextUpload();
+                        $(".item-vote .pict.vote-up").click();
+                        Utils.rating = $(".item-vote")[0].className;
+                    }
+                    else
+                    {
+                        if(Settings.settings.skipUploadAfterRate)
+                        {
+                            Utils.showNotification("Skipped because the you rated positive", this.pr0gramm.getLocation());
+                            Utils.nextUpload();
+                        }
+                    }     
+                }
+                else if(e.key == "s" || e.key == "-" || e.key == "b")
+                {
+                    if(Utils.rating.includes("voted-down"))
+                    {
+                        $(".item-vote .pict.vote-down").click();
+                        Utils.rating = $(".item-vote")[0].className;                        
+                    }
+                    else
+                    {
+                        if(Settings.settings.skipUploadAfterRate)
+                        {
+                            Utils.showNotification("Skipped because the you rated negative", this.pr0gramm.getLocation());
+                            Utils.nextUpload();
+                        }
                     }
                 }
             }
@@ -36,7 +60,12 @@ export default class Keypress
                 $("#stream a:first")[0].click();
             }
 
-            if(e.key == "e")
+            if(e.key == "x")
+            {
+                Settings.settings.isActive = !Settings.settings.isActive;
+                Settings.quickSave();
+            }
+            else if(e.key == "e")
             {
                 this.pr0gramm.navigateTo("settings/site",0);
             }
