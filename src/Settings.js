@@ -112,13 +112,18 @@ export default class Settings
         $("#bt input:first").keyup(function(e){
             if(e.key == ",")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(",");
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                Utils.createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    Utils.createNameTag(_this, text);
+                });  
+                this.value = "";
             }
         });
     
@@ -135,13 +140,18 @@ export default class Settings
         $("#bu input:first").keyup(function(e){
             if(e.key == ",")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(",");
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                Utils.createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    Utils.createNameTag(_this, text);
+                });
+                this.value = "";
             }
         });
         $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
@@ -156,13 +166,18 @@ export default class Settings
         $("#bc input:first").keyup(function(e){
             if(e.key == "," || e.key == " ")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(/[\s,]+/);
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                Utils.createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    Utils.createNameTag(_this, text);
+                });
+                this.value = text;
             }
         });
         $("#bc input")[1].checked = Settings.settings.blockCommentsByBenis;
