@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.5
+// @version		0.7.6
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -616,13 +616,18 @@ class Settings
         $("#bt input:first").keyup(function(e){
             if(e.key == ",")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(",");
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(_this, text);
+                });  
+                this.value = "";
             }
         });
     
@@ -639,13 +644,18 @@ class Settings
         $("#bu input:first").keyup(function(e){
             if(e.key == ",")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(",");
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(_this, text);
+                });
+                this.value = "";
             }
         });
         $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
@@ -660,13 +670,18 @@ class Settings
         $("#bc input:first").keyup(function(e){
             if(e.key == "," || e.key == " ")
             {
-                let text = this.value.slice(0,this.value.length-1).trim().toLowerCase();
-                if(text.length <3) 
+                let _this = this;
+                let textarray = this.value.split(/[\s,]+/);
+                textarray.forEach(function(e)
                 {
-                    this.value = text;
-                    return;
-                }
-                __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(this, text);
+                    let text = e.trim().toLowerCase();
+                    if(text.length <3) 
+                    {
+                        return;
+                    }
+                    __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag(_this, text);
+                });
+                this.value = text;
             }
         });
         $("#bc input")[1].checked = Settings.settings.blockCommentsByBenis;
