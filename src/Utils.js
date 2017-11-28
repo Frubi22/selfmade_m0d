@@ -407,6 +407,14 @@ export default class Utils
     {
         Utils.rating = $(".item-vote")[0].className;
     }
+
+    static uniq(a) 
+    {
+        var seen = {};
+        return a.filter(function(item) {
+            return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+        });
+    }
 }
 
 Utils.pr0gramm = p;

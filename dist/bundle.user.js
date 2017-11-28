@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.8
+// @version		0.7.9
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -489,6 +489,14 @@ class Utils
     {
         Utils.rating = $(".item-vote")[0].className;
     }
+
+    static uniq(a) 
+    {
+        var seen = {};
+        return a.filter(function(item) {
+            return seen.hasOwnProperty(item) ? false : (seen[item] = true);
+        });
+    }
 }
 /* harmony export (immutable) */ __webpack_exports__["a"] = Utils;
 
@@ -747,6 +755,7 @@ class Settings
             let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.blockedTags.push(text.toLowerCase());
         });
+        Settings.settings.blockedTags = __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].uniq(Settings.settings.blockedTags);
 
         Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length >0?true:false;
         Settings.settings.onlyGoodTags = $("#bt input")[1].checked;
@@ -758,9 +767,11 @@ class Settings
         $("#bu input:first").prev().find("span").each(function()
         {
             let text = this.innerText.slice(0,this.innerText.length-3);
+
             Settings.settings.blockedUsers.push(text.toLowerCase());
         });
-
+        Settings.settings.blockedUsers = __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].uniq(Settings.settings.blockedUsers);
+        
         Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
         Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
         //#endregion
@@ -772,6 +783,8 @@ class Settings
             let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.commentBlacklist.push(text.toLowerCase());
         });
+        Settings.settings.commentBlacklist = __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].uniq(Settings.settings.commentBlacklist);
+        
         Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length >0 ? true:false;
         Settings.settings.blockCommentsByBenis = $("#bc input")[1].checked;
         Settings.settings.commentMinBenis = Number($("#bc input")[2].value);

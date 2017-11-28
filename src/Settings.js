@@ -243,6 +243,7 @@ export default class Settings
             let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.blockedTags.push(text.toLowerCase());
         });
+        Settings.settings.blockedTags = Utils.uniq(Settings.settings.blockedTags);
 
         Settings.settings.skipUploadByTag = Settings.settings.blockedTags.length >0?true:false;
         Settings.settings.onlyGoodTags = $("#bt input")[1].checked;
@@ -254,9 +255,11 @@ export default class Settings
         $("#bu input:first").prev().find("span").each(function()
         {
             let text = this.innerText.slice(0,this.innerText.length-3);
+
             Settings.settings.blockedUsers.push(text.toLowerCase());
         });
-
+        Settings.settings.blockedUsers = Utils.uniq(Settings.settings.blockedUsers);
+        
         Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
         Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
         //#endregion
@@ -268,6 +271,8 @@ export default class Settings
             let text = this.innerText.slice(0,this.innerText.length-3);
             Settings.settings.commentBlacklist.push(text.toLowerCase());
         });
+        Settings.settings.commentBlacklist = Utils.uniq(Settings.settings.commentBlacklist);
+        
         Settings.settings.blockCommentsByBlacklist = Settings.settings.commentBlacklist.length >0 ? true:false;
         Settings.settings.blockCommentsByBenis = $("#bc input")[1].checked;
         Settings.settings.commentMinBenis = Number($("#bc input")[2].value);
