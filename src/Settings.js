@@ -117,7 +117,7 @@ export default class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }
@@ -136,7 +136,7 @@ export default class Settings
         {
             Utils.createNameTag($("#bu input")[0], e);
         });
-    
+
         $("#bu input:first").keyup(function(e){
             if(e.key == ",")
             {
@@ -145,7 +145,7 @@ export default class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }
@@ -171,7 +171,7 @@ export default class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }

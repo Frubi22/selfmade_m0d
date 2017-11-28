@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.6
+// @version		0.7.7
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -621,7 +621,7 @@ class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }
@@ -640,7 +640,7 @@ class Settings
         {
             __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].createNameTag($("#bu input")[0], e);
         });
-    
+
         $("#bu input:first").keyup(function(e){
             if(e.key == ",")
             {
@@ -649,7 +649,7 @@ class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }
@@ -675,7 +675,7 @@ class Settings
                 textarray.forEach(function(e)
                 {
                     let text = e.trim().toLowerCase();
-                    if(text.length <3) 
+                    if(text.length <1) 
                     {
                         return;
                     }
