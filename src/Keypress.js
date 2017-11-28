@@ -26,8 +26,7 @@ export default class Keypress
                 {
                     if(Utils.rating.includes("voted-up"))
                     {
-                        $(".item-vote .pict.vote-up").click();
-                        Utils.rating = $(".item-vote")[0].className;
+                        $(".item-vote .pict.vote-up").click();   
                     }
                     else
                     {
@@ -36,14 +35,14 @@ export default class Keypress
                             Utils.showNotification("Skipped because the you rated positive", this.pr0gramm.getLocation());
                             Utils.nextUpload();
                         }
-                    }     
+                    }    
+                    Utils.rating = $(".item-vote")[0].className; 
                 }
                 else if(e.key == "s" || e.key == "-" || e.key == "b")
                 {
                     if(Utils.rating.includes("voted-down"))
                     {
-                        $(".item-vote .pict.vote-down").click();
-                        Utils.rating = $(".item-vote")[0].className;                        
+                        $(".item-vote .pict.vote-down").click();                   
                     }
                     else
                     {
@@ -53,6 +52,7 @@ export default class Keypress
                             Utils.nextUpload();
                         }
                     }
+                    Utils.rating = $(".item-vote")[0].className;  
                 }
             }
             else if(e.key == "d")
