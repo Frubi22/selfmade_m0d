@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.7.9
+// @version		0.7.10
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -1021,7 +1021,7 @@ class Modules
                 {   
                     wasSkipped = _this.skipUploadByUserRank();
                 }
-                else if(!wasSkipped)
+                if(!wasSkipped)
                 {
                     if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.blockCommentsByUser)
                         _this.blockCommentsByUser();

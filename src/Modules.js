@@ -41,7 +41,7 @@ export default class Modules
                 {   
                     wasSkipped = _this.skipUploadByUserRank();
                 }
-                else if(!wasSkipped)
+                if(!wasSkipped)
                 {
                     if(Settings.settings.blockCommentsByUser)
                         _this.blockCommentsByUser();
