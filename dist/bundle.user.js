@@ -1238,6 +1238,7 @@ class Keypress
         let _this = this;
         window.addEventListener("keypress", function(e){_this.shortcuts(e);})
         window.addEventListener("wheel", function(e){_this.mousewheel(e);})
+        window.addEventListener("keydown",function(e){_this.keydown(e);})
         this.pr0gramm = p
     }
 
@@ -1285,14 +1286,6 @@ class Keypress
                         }
                     }
                 }
-                else if(e.key == "d" || e.key == "right" )
-                {
-                    __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = -1;
-                }
-                else if(e.key == "a" || e.key == "left")
-                {
-                    __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = 1;
-                }
             }
             else if(e.key == "d")
             {
@@ -1336,6 +1329,17 @@ class Keypress
             __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = -1;
         }
         else if(e.deltaY <= 0)
+        {
+            __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = 1;
+        }
+    }
+    keydown(e)
+    {
+        if(e.key == "d" || e.key == "right" )
+        {
+            __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = -1;
+        }
+        else if(e.key == "a" || e.key == "left")
         {
             __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = 1;
         }

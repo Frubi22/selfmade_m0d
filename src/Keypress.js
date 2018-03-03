@@ -8,6 +8,7 @@ export default class Keypress
         let _this = this;
         window.addEventListener("keypress", function(e){_this.shortcuts(e);})
         window.addEventListener("wheel", function(e){_this.mousewheel(e);})
+        window.addEventListener("keydown",function(e){_this.keydown(e);})
         this.pr0gramm = p
     }
 
@@ -55,14 +56,6 @@ export default class Keypress
                         }
                     }
                 }
-                else if(e.key == "d" || e.key == "right" )
-                {
-                    Settings.settings.nextUploadDirection = -1;
-                }
-                else if(e.key == "a" || e.key == "left")
-                {
-                    Settings.settings.nextUploadDirection = 1;
-                }
             }
             else if(e.key == "d")
             {
@@ -106,6 +99,17 @@ export default class Keypress
             Settings.settings.nextUploadDirection = -1;
         }
         else if(e.deltaY <= 0)
+        {
+            Settings.settings.nextUploadDirection = 1;
+        }
+    }
+    keydown(e)
+    {
+        if(e.key == "d" || e.key == "right" )
+        {
+            Settings.settings.nextUploadDirection = -1;
+        }
+        else if(e.key == "a" || e.key == "left")
         {
             Settings.settings.nextUploadDirection = 1;
         }
