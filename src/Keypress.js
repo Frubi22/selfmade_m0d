@@ -7,6 +7,8 @@ export default class Keypress
     {
         let _this = this;
         window.addEventListener("keypress", function(e){_this.shortcuts(e);})
+        window.addEventListener("wheel", function(e){_this.mousewheel(e);})
+        window.addEventListener("keydown",function(e){_this.keydown(e);})
         this.pr0gramm = p
     }
 
@@ -88,6 +90,28 @@ export default class Keypress
                 e.preventDefault();
                 this.pr0gramm.navigateTo("stalk",0);
             } 
+        }
+    }
+    mousewheel(e)
+    {
+        if(e.deltaY >= 0)
+        {
+            Settings.settings.nextUploadDirection = -1;
+        }
+        else if(e.deltaY <= 0)
+        {
+            Settings.settings.nextUploadDirection = 1;
+        }
+    }
+    keydown(e)
+    {
+        if(e.key == "d" || e.key == "ArrowRight" )
+        {
+            Settings.settings.nextUploadDirection = -1;
+        }
+        else if(e.key == "a" || e.key == "ArrowLeft")
+        {
+            Settings.settings.nextUploadDirection = 1;
         }
     }
 }
