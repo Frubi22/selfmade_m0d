@@ -202,7 +202,6 @@ export default class Settings
         //#endregion
 
         //#region Skip
-        $("#sr input")[0].checked = Settings.settings.nextUploadDirection==-1?true:false;
         $("#sr input")[1].checked = Settings.settings.skipUploadAfterRate;
         //#endregion
 
@@ -219,10 +218,13 @@ export default class Settings
         });
         $("#reset a").click(function()
         {
-            localStorage.removeItem("Selfmade_M0d_Settings");
-            Settings.settings = Object.assign({},_this.defaultSettings);
-            $("a.selfmade_m0d").click();
-            Utils.showNotification("Einstellungen zurückgesetzt");
+            if(confirm("Wirklich alle Einstellungen löschen?"))
+            {
+                localStorage.removeItem("Selfmade_M0d_Settings");
+                Settings.settings = Object.assign({},_this.defaultSettings);
+                $("a.selfmade_m0d").click();
+                Utils.showNotification("Einstellungen zurückgesetzt");
+            }
         });
     
         $(".box-from-label").next().each(function()
@@ -292,7 +294,6 @@ export default class Settings
         //#endregion
 
         //#region Skip
-        Settings.settings.nextUploadDirection = $("#sr input")[0].checked ? -1:1;
         Settings.settings.skipUploadAfterRate = $("#sr input")[1].checked;
         //#endregion
         
@@ -332,5 +333,4 @@ export default class Settings
         $(element).addClass("active");
     }
 }
-
 Settings.settings = {};
