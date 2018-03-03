@@ -105,11 +105,11 @@ export default class Keypress
     }
     keydown(e)
     {
-        if(e.key == "d" || e.key == "right" )
+        if(e.key == "d" || e.key == "ArrowRight" )
         {
             Settings.settings.nextUploadDirection = -1;
         }
-        else if(e.key == "a" || e.key == "left")
+        else if(e.key == "a" || e.key == "ArrowLeft")
         {
             Settings.settings.nextUploadDirection = 1;
         }

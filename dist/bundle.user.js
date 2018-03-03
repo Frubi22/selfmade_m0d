@@ -1335,11 +1335,11 @@ class Keypress
     }
     keydown(e)
     {
-        if(e.key == "d" || e.key == "right" )
+        if(e.key == "d" || e.key == "ArrowRight" )
         {
             __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = -1;
         }
-        else if(e.key == "a" || e.key == "left")
+        else if(e.key == "a" || e.key == "ArrowLeft")
         {
             __WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.nextUploadDirection = 1;
         }
