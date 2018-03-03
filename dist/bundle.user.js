@@ -706,7 +706,7 @@ class Settings
         //#endregion
 
         //#region Skip
-        $("#sr input")[1].checked = Settings.settings.skipUploadAfterRate;
+        $("#sr input")[0].checked = Settings.settings.skipUploadAfterRate;
         //#endregion
 
         //#region Notification
@@ -798,7 +798,7 @@ class Settings
         //#endregion
 
         //#region Skip
-        Settings.settings.skipUploadAfterRate = $("#sr input")[1].checked;
+        Settings.settings.skipUploadAfterRate = $("#sr input")[0].checked;
         //#endregion
         
         //#region Others
