@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.8.0
+// @version		0.8.1
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -990,7 +990,9 @@ class Modules
         let _this = this;
         window.addEventListener("commentsReady", function()
         {
-            setTimeout(function(){_this.executeModules(); },10);     
+            setTimeout(function(){_this.executeModules(); },10);
+            $(".stream-prev").click(function(){__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.nextUploadDirection = 1});
+            $(".stream-next").click(function(){__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.nextUploadDirection = -1});
         });
     }
 

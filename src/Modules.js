@@ -10,7 +10,9 @@ export default class Modules
         let _this = this;
         window.addEventListener("commentsReady", function()
         {
-            setTimeout(function(){_this.executeModules(); },10);     
+            setTimeout(function(){_this.executeModules(); },10);
+            $(".stream-prev").click(function(){Settings.settings.nextUploadDirection = 1});
+            $(".stream-next").click(function(){Settings.settings.nextUploadDirection = -1});
         });
     }
 
