@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.8.2
+// @version		0.8.3
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -96,7 +96,7 @@ class Utils
         {
             _this.addBlockTagSign();
             _this.addBlockUserSign()
-            _this.getRating();
+            setTimeout(function(){_this.getRating()}, 10);
         });
 
         window.addEventListener("userReady", function()

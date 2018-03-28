@@ -14,7 +14,7 @@ export default class Utils
         {
             _this.addBlockTagSign();
             _this.addBlockUserSign()
-            _this.getRating();
+            setTimeout(function(){_this.getRating()}, 10);
         });
 
         window.addEventListener("userReady", function()
