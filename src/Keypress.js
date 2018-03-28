@@ -34,7 +34,7 @@ export default class Keypress
                     {
                         if(Settings.settings.skipUploadAfterRate)
                         {
-                            Utils.showNotification("Skipped because the you rated positive", this.pr0gramm.getLocation());
+                            Utils.showNotification("Skipped because: you rated positive", this.pr0gramm.getLocation());
                             Utils.nextUpload();
                         }
                     }    
@@ -50,7 +50,7 @@ export default class Keypress
                     {
                         if(Settings.settings.skipUploadAfterRate)
                         {
-                            Utils.showNotification("Skipped because the you rated negative", this.pr0gramm.getLocation());
+                            Utils.showNotification("Skipped because: you rated negative", this.pr0gramm.getLocation());
                             Utils.nextUpload();
                         }
                     }

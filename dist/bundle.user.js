@@ -4,7 +4,7 @@
 // @description:de Erweitert pr0gramm.com um weitere Funktionen zum Blocken von Content
 // @include		*://pr0gramm.com/*
 // @grant       none
-// @version		0.8.1
+// @version		0.8.2
 // @updateURL   https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @downloadURL https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js
 // @namespace   https://github.com/Frubi22/selfmade_m0d
@@ -1279,7 +1279,7 @@ class Keypress
                     {
                         if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
                         {
-                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because the you rated positive", this.pr0gramm.getLocation());
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because: you rated positive", this.pr0gramm.getLocation());
                             __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();
                         }
                     }    
@@ -1295,7 +1295,7 @@ class Keypress
                     {
                         if(__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.skipUploadAfterRate)
                         {
-                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because the you rated negative", this.pr0gramm.getLocation());
+                            __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].showNotification("Skipped because: you rated negative", this.pr0gramm.getLocation());
                             __WEBPACK_IMPORTED_MODULE_0__Utils__["a" /* default */].nextUpload();
                         }
                     }
