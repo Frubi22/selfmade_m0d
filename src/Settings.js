@@ -32,7 +32,8 @@ export default class Settings
             notificationColor: "#ee4d2e",
             notificationDuration: 3.0,
             collapseTooLongComments: true,
-            skipUploadAfterRate: false
+            skipUploadAfterRate: false,
+            disableNumberNavigation: false
         }
         this.pr0gramm = p;
         let _this = this
@@ -68,7 +69,7 @@ export default class Settings
 
     addSettingsTab()
     {
-        let _this = this
+        let _this = this;
         let tmp = $(".selfmade_M0d");
         if(tmp.length != 0)
         {
@@ -211,6 +212,10 @@ export default class Settings
         $("#nf input")[2].value = Settings.settings.notificationDuration;
         //#endregion
 
+        //#region Hotkeys
+        $("#hk input")[0].checked = Settings.settings.disableNumberNavigation;
+        //endregion
+
         $("#save input").click(function()
         { 
             _this.saveSettings();
@@ -317,6 +322,10 @@ export default class Settings
         var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
         var yiq = ((r*299)+(g*587)+(b*114))/1000;
         $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
+        //#endregion
+
+        //#region Hotkeys
+        Settings.settings.disableNumberNavigation = $("#hk input")[0].checked;
         //#endregion
  
         Settings.quickSave();

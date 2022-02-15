@@ -544,7 +544,8 @@ class Settings
             notificationColor: "#ee4d2e",
             notificationDuration: 3.0,
             collapseTooLongComments: true,
-            skipUploadAfterRate: false
+            skipUploadAfterRate: false,
+            disableNumberNavigation: false
         }
         this.pr0gramm = p;
         let _this = this
@@ -580,7 +581,7 @@ class Settings
 
     addSettingsTab()
     {
-        let _this = this
+        let _this = this;
         let tmp = $(".selfmade_M0d");
         if(tmp.length != 0)
         {
@@ -723,6 +724,10 @@ class Settings
         $("#nf input")[2].value = Settings.settings.notificationDuration;
         //#endregion
 
+        //#region Hotkeys
+        $("#hk input")[0].checked = Settings.settings.disableNumberNavigation;
+        //endregion
+
         $("#save input").click(function()
         { 
             _this.saveSettings();
@@ -829,6 +834,10 @@ class Settings
         var b = parseInt(Settings.settings.notificationColor.substr(5,2),16);
         var yiq = ((r*299)+(g*587)+(b*114))/1000;
         $("#notificationbox").css("color",(yiq >= 128) ? 'black' : 'white');
+        //#endregion
+
+        //#region Hotkeys
+        Settings.settings.disableNumberNavigation = $("#hk input")[0].checked;
         //#endregion
  
         Settings.quickSave();
@@ -963,7 +972,7 @@ class EventHandler
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"form-section selfmade_m0d\">\r\n    <div class=\"tab\" style=\"display: inline-block\">\r\n        <button class=\"tablinks\" id=\"default\" data-tab=\"settings\">Einstellungen</button>\r\n        <button class=\"tablinks\" data-tab=\"shortcuts\">Shortcuts</button>\r\n        <button class=\"tablinks\" data-tab= \"credits\">Credits</button>\r\n    </div><hr>\r\n    <div class=\"tabcontent\" id=\"settings\">\r\n            <div id=\"bt\">\r\n                Geblockte Tags:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"tag1,tag2,tag3,...\" title=\"Tags mit Komma trennen!\"></input>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"onlyGoodTags\">\r\n                    <label for=\"onlyGoodTags\"> Ignoriere Tags mit negativen Benis </label>\r\n                Anzahl der zu berücksichtigen Tags: <input type=\"number\" min=\"-1\" max=\"999\" value=\"-1\" title=\"-1 = alle\">\r\n            </div>\r\n            <br><hr />\r\n            <div id=\"bu\" title=\"Nutzernamen mit Komma trennen!\">\r\n                Geblockte Nutzer:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"nutzer1,nutzer2,nutzer3,...\"></input>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"bc\">\r\n                    <label for=\"bc\"> Kommentare von geblockten Nutzern entfernen</label>\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"bc\">\r\n                Geblockte Wörter in den Kommentaren:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"wort1,wort2,wort3,...\" title=\"Wörter mit Komma trennen!\"></input><br>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"ComMinBenis\">\r\n                    <label for=\"ComMinBenis\" style=\"display:inline-block\"> Mindest Benis bei Kommentaren:</label> <input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"shortComms\" /> <label for=\"shortComms\"> Zu lange Kommentare kürzen</label>\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"br\" >\r\n                Geblockte Ränge:<br>\r\n                <div style=\"margin-left:25px;\">\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Gesperrt\">\r\n                        <label for=\"Gesperrt\" style=\"color:#444444\"> Gesperrt </label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Fliesentischbesitzer\">\r\n                        <label for=\"Fliesentischbesitzer\" style=\"color:#6C432B\"> Fliesentischbesitzer</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Neuschwuchtel\">\r\n                        <label for=\"Neuschwuchtel\" style=\"color:#E108E9\" >Neuschwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Schwuchtel\">\r\n                        <label for=\"Schwuchtel\" style=\"color:#FFFFFF\">Schwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Altschwuchtel\">\r\n                        <label for=\"Altschwuchtel\" style=\"color:#5BB91C\"> Altschwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Wichtler\">\r\n                        <label for=\"Wichtler\" style=\"color:#D23C22\"> Wichtler</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Edler Spender\">\r\n                        <label for=\"Edler Spender\" style=\"color:#1cb992\"> Edler Spender</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Lebende Legende\">\r\n                        <label for=\"Lebende Legende\" style=\"color:#1cb992\"> Lebende Legende</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Moderator\">\r\n                        <label for=\"Moderator\" style=\"color:#008FFF\"> Moderator</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Administrator\">\r\n                        <label for=\"Administrator\" style=\"color:#FF9900\"> Administrator</label>\r\n                </div>\t\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"mb\" >\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"minBenis\" >\r\n                    <label for=\"minBenis\" style=\"display:inline-block\">Skippe Bilder mit einem Benis kleiner als: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\"><br>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"minAverageBenis\" >\r\n                    <label for=\"minAverageBenis\" style=\"display:inline-block\"> Skippe Bilder mit einem Benis verhältnis(+/-) kleiner als: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"sr\" >\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"sar\">\r\n                    <label for=\"sar\"> Nach Bewertung skippen</label>\r\n            </div>\r\n            <br><hr>\r\n            <div id=\"nf\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"notification\">\r\n                    <label for=\"notification\">Notifications anzeigen</label>\r\n                Notificationsfarbe: <input type=\"color\" id=\"color\"><br>\r\n                Notificationdauer in Sekunden: <input type=\"number\">\r\n            </div>\r\n            <br>\r\n            <div id=\"save\">\r\n                <input type=\"submit\" value=\"Speichern\" class=\"confirm settings-save\"></input>\r\n            </div>\r\n            <br>\r\n            <div id=\"reset\">\r\n                <a class=\"action clear-settings-button\">Einstellungen zurücksetzen</a>\r\n            </div>\r\n    </div>\r\n    <div class=\"tabcontent\" id=\"shortcuts\">\r\n        <span>-'1' um auf /neu zu gehen</span>\r\n        <span>-'2' um auf /top zu gehen</span>\r\n        <span>-'3' um auf /stalk zu gehen</span>\r\n        <span>-'x' um das Addon zu de-/aktivieren</span>\r\n        <span>-'d' um das erste Bild zu öffnen wenn noch keins offen ist </span>\r\n        <span>-'e' um zu den Einstellungen zu kommen</span>\r\n        <span>-'n' um zu den Nachrichten zu kommen</span>\r\n        <span>-Linksklick auf eine Notification bringt dich zurück zum Bild</span>\r\n        <span>-Rechtsklick auf eine Notification entfernt sie</span>\r\n        <span>-Ein erneutes Bewerten eines Bilder per Tasten entfernt die Bewertung wieder</span>\r\n        <span>-Klicke auf einen geblockten Kommentar um ihn wieder sichtbar zu machen</span>\r\n    </div>\r\n    <div class=\"tabcontent\" id=\"credits\">\r\n        <span>Author: <a onclick=\"p.navigateTo('user/Frubi',0)\">Frubi</a></span>\r\n        <span>Soße: <a href=\"https://greasyfork.org/de/scripts/35129-selfmade-m0d\">Selfmade M0d auf Greasyfork</a></span>\r\n        <span>Code: <a href=\"https://github.com/Frubi22/selfmade_m0d/\">Selfmade M0d auf GitHub</a></span>\r\n        <span>Tester: <a onclick=\"p.navigateTo('user/apeir0n',0)\">apeir0n</a></span>\r\n    </div>\r\n</div>\r\n";
+module.exports = "<div class=\"form-section selfmade_m0d\">\r\n    <div class=\"tab\" style=\"display: inline-block\">\r\n        <button class=\"tablinks\" id=\"default\" data-tab=\"settings\">Einstellungen</button>\r\n        <button class=\"tablinks\" data-tab=\"shortcuts\">Shortcuts</button>\r\n        <button class=\"tablinks\" data-tab= \"credits\">Credits</button>\r\n    </div><hr>\r\n    <div class=\"tabcontent\" id=\"settings\">\r\n            <div id=\"bt\">\r\n                Geblockte Tags:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"tag1,tag2,tag3,...\" title=\"Tags mit Komma trennen!\"></input>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"onlyGoodTags\">\r\n                    <label for=\"onlyGoodTags\"> Ignoriere Tags mit negativen Benis </label>\r\n                Anzahl der zu berücksichtigen Tags: <input type=\"number\" min=\"-1\" max=\"999\" value=\"-1\" title=\"-1 = alle\">\r\n            </div>\r\n            <br><hr />\r\n            <div id=\"bu\" title=\"Nutzernamen mit Komma trennen!\">\r\n                Geblockte Nutzer:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"nutzer1,nutzer2,nutzer3,...\"></input>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"bc\">\r\n                    <label for=\"bc\"> Kommentare von geblockten Nutzern entfernen</label>\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"bc\">\r\n                Geblockte Wörter in den Kommentaren:<br>\r\n                <div class=\"tag-container\"></div>\r\n                <input placeholder=\"wort1,wort2,wort3,...\" title=\"Wörter mit Komma trennen!\"></input><br>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"ComMinBenis\">\r\n                    <label for=\"ComMinBenis\" style=\"display:inline-block\"> Mindest Benis bei Kommentaren:</label> <input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"shortComms\" /> <label for=\"shortComms\"> Zu lange Kommentare kürzen</label>\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"br\" >\r\n                Geblockte Ränge:<br>\r\n                <div style=\"margin-left:25px;\">\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Gesperrt\">\r\n                        <label for=\"Gesperrt\" style=\"color:#444444\"> Gesperrt </label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Fliesentischbesitzer\">\r\n                        <label for=\"Fliesentischbesitzer\" style=\"color:#6C432B\"> Fliesentischbesitzer</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Neuschwuchtel\">\r\n                        <label for=\"Neuschwuchtel\" style=\"color:#E108E9\" >Neuschwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Schwuchtel\">\r\n                        <label for=\"Schwuchtel\" style=\"color:#FFFFFF\">Schwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Altschwuchtel\">\r\n                        <label for=\"Altschwuchtel\" style=\"color:#5BB91C\"> Altschwuchtel</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Wichtler\">\r\n                        <label for=\"Wichtler\" style=\"color:#D23C22\"> Wichtler</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Edler Spender\">\r\n                        <label for=\"Edler Spender\" style=\"color:#1cb992\"> Edler Spender</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Lebende Legende\">\r\n                        <label for=\"Lebende Legende\" style=\"color:#1cb992\"> Lebende Legende</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Moderator\">\r\n                        <label for=\"Moderator\" style=\"color:#008FFF\"> Moderator</label>\r\n                    <input type=\"checkbox\" class=\"box-from-label\" name=\"Administrator\">\r\n                        <label for=\"Administrator\" style=\"color:#FF9900\"> Administrator</label>\r\n                </div>\t\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"mb\" >\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"minBenis\" >\r\n                    <label for=\"minBenis\" style=\"display:inline-block\">Skippe Bilder mit einem Benis kleiner als: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\"><br>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"minAverageBenis\" >\r\n                    <label for=\"minAverageBenis\" style=\"display:inline-block\"> Skippe Bilder mit einem Benis verhältnis(+/-) kleiner als: </label><input type=\"number\" min=\"-999\" max=\"999\" value=\"0\">\r\n            </div>\r\n            <br><hr/>\r\n            <div id=\"sr\" >\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"sar\">\r\n                    <label for=\"sar\"> Nach Bewertung skippen</label>\r\n            </div>\r\n            <br><hr>\r\n            <div id=\"nf\">\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"notification\">\r\n                    <label for=\"notification\">Notifications anzeigen</label>\r\n                Notificationsfarbe: <input type=\"color\" id=\"color\"><br>\r\n                Notificationdauer in Sekunden: <input type=\"number\">\r\n            </div>\r\n            <br><hr>\r\n            <div id=\"hk\">\r\n                Hotkeys:<br>\r\n                <input type=\"checkbox\" class=\"box-from-label\" name=\"numhotkey\">\r\n                <label for=\"numhotkey\"> Nummern Navigationshotkeys deaktivieren</label>\r\n            </div>\r\n            <br><hr>\r\n            <br>\r\n            <div id=\"save\">\r\n                <input type=\"submit\" value=\"Speichern\" class=\"confirm settings-save\"></input>\r\n            </div>\r\n            <br>\r\n            <div id=\"reset\">\r\n                <a class=\"action clear-settings-button\">Einstellungen zurücksetzen</a>\r\n            </div>\r\n    </div>\r\n    <div class=\"tabcontent\" id=\"shortcuts\">\r\n        <span>-'1' um auf /neu zu gehen</span>\r\n        <span>-'2' um auf /top zu gehen</span>\r\n        <span>-'3' um auf /stalk zu gehen</span>\r\n        <span>-'x' um das Addon zu de-/aktivieren</span>\r\n        <span>-'d' um das erste Bild zu öffnen wenn noch keins offen ist </span>\r\n        <span>-'e' um zu den Einstellungen zu kommen</span>\r\n        <span>-'n' um zu den Nachrichten zu kommen</span>\r\n        <span>-Linksklick auf eine Notification bringt dich zurück zum Bild</span>\r\n        <span>-Rechtsklick auf eine Notification entfernt sie</span>\r\n        <span>-Ein erneutes Bewerten eines Bilder per Tasten entfernt die Bewertung wieder</span>\r\n        <span>-Klicke auf einen geblockten Kommentar um ihn wieder sichtbar zu machen</span>\r\n    </div>\r\n    <div class=\"tabcontent\" id=\"credits\">\r\n        <span>Author: <a onclick=\"p.navigateTo('user/Frubi',0)\">Frubi</a></span>\r\n        <span>Soße: <a href=\"https://greasyfork.org/de/scripts/35129-selfmade-m0d\">Selfmade M0d auf Greasyfork</a></span>\r\n        <span>Code: <a href=\"https://github.com/Frubi22/selfmade_m0d/\">Selfmade M0d auf GitHub</a></span>\r\n        <span>Tester: <a onclick=\"p.navigateTo('user/apeir0n',0)\">apeir0n</a></span>\r\n    </div>\r\n</div>\r\n";
 
 /***/ }),
 /* 5 */
@@ -1320,21 +1329,24 @@ class Keypress
             {
                 this.pr0gramm.navigateTo("inbox/all",0);
             }
-            else if(e.key == "1")
+            else if(!__WEBPACK_IMPORTED_MODULE_1__Settings__["a" /* default */].settings.disableNumberNavigation)
             {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("new",0);
+                if(e.key == "1")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("new",0);
+                }
+                else if(e.key == "2")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("top",0);
+                }
+                else if(e.key == "3")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("stalk",0);
+                } 
             }
-            else if(e.key == "2")
-            {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("top",0);
-            }
-            else if(e.key == "3")
-            {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("stalk",0);
-            } 
         }
     }
     mousewheel(e)
@@ -1398,7 +1410,7 @@ if(false) {
 /* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-exports = module.exports = __webpack_require__(10)(undefined);
+exports = module.exports = __webpack_require__(10)(false);
 // imports
 
 
@@ -1560,7 +1572,7 @@ module.exports = function(list, options) {
 
 	// Force single-tag solution on IE6-9, which has a hard limit on the # of <style>
 	// tags it will allow on a page
-	if (!options.singleton) options.singleton = isOldIE();
+	if (!options.singleton && typeof options.singleton !== "boolean") options.singleton = isOldIE();
 
 	// By default, add <style> tags to the <head> element
 	if (!options.insertInto) options.insertInto = "head";
