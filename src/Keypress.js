@@ -75,21 +75,24 @@ export default class Keypress
             {
                 this.pr0gramm.navigateTo("inbox/all",0);
             }
-            else if(e.key == "1")
+            else if(!Settings.settings.disableNumberNavigation)
             {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("new",0);
+                if(e.key == "1")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("new",0);
+                }
+                else if(e.key == "2")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("top",0);
+                }
+                else if(e.key == "3")
+                {
+                    e.preventDefault();
+                    this.pr0gramm.navigateTo("stalk",0);
+                } 
             }
-            else if(e.key == "2")
-            {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("top",0);
-            }
-            else if(e.key == "3")
-            {
-                e.preventDefault();
-                this.pr0gramm.navigateTo("stalk",0);
-            } 
         }
     }
     mousewheel(e)
