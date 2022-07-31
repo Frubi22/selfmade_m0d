@@ -33,7 +33,8 @@ export default class Settings
             notificationDuration: 3.0,
             collapseTooLongComments: true,
             skipUploadAfterRate: false,
-            disableNumberNavigation: false
+            disableNumberNavigation: false,
+            disableUserSkippingOnTop: false
         }
         this.pr0gramm = p;
         let _this = this
@@ -156,6 +157,7 @@ export default class Settings
             }
         });
         $("#bu input")[1].checked = Settings.settings.blockCommentsByUser;
+        $("#bu input")[2].checked = Settings.settings.disableUserSkippingOnTop;
         //#endregion
 
         //#region Comments
@@ -269,6 +271,7 @@ export default class Settings
         
         Settings.settings.skipUploadByUser = Settings.settings.blockedUsers.length >0 ? true:false;
         Settings.settings.blockCommentsByUser = $("#bu input")[1].checked;
+        Settings.settings.disableUserSkippingOnTop = $("#bu input")[2].checked;
         //#endregion
 
         //#region Comments
