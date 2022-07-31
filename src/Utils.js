@@ -361,15 +361,14 @@ export default class Utils
         return $(".item-details .user")[0].innerText.toLowerCase();        
     }
 
-    getCurrentURL()
+    static getCurrentURL()
     {
         return window.location.href;
     }
 
-    isUserOnTop()
+    static isUserOnTop()
     {
-        let url = getCurrentURL();
-        return url.startsWith("https://pr0gramm.com/top/");
+        return window.location.href.startsWith("https://pr0gramm.com/top/");
     }
 
     static getUserRank(user)

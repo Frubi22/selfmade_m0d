@@ -443,15 +443,14 @@ class Utils
         return $(".item-details .user")[0].innerText.toLowerCase();        
     }
 
-    getCurrentURL()
+    static getCurrentURL()
     {
         return window.location.href;
     }
 
-    isUserOnTop()
+    static isUserOnTop()
     {
-        let url = getCurrentURL();
-        return url.startsWith("https://pr0gramm.com/top/");
+        return window.location.href.startsWith("https://pr0gramm.com/top/");
     }
 
     static getUserRank(user)
@@ -1022,7 +1021,6 @@ class Modules
     executeModules()
     {
         let _this = this;
-
             if(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.isActive)
             {
                 let wasSkipped = false;  
@@ -1030,7 +1028,7 @@ class Modules
                 {
                     wasSkipped = _this.skipUploadByTag();
                 }
-                if(!(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.disableUserSkippingOnTop && isUserOnTop()) && __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser && !wasSkipped)
+                if(!(__WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.disableUserSkippingOnTop && __WEBPACK_IMPORTED_MODULE_1__Utils__["a" /* default */].isUserOnTop()) && __WEBPACK_IMPORTED_MODULE_0__Settings__["a" /* default */].settings.skipUploadByUser && !wasSkipped)
                 {
                     wasSkipped = _this.skipUploadByUser();
                 }

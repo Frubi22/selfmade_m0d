@@ -19,7 +19,6 @@ export default class Modules
     executeModules()
     {
         let _this = this;
-
             if(Settings.settings.isActive)
             {
                 let wasSkipped = false;  
@@ -27,7 +26,7 @@ export default class Modules
                 {
                     wasSkipped = _this.skipUploadByTag();
                 }
-                if(!(Settings.settings.disableUserSkippingOnTop && isUserOnTop()) && Settings.settings.skipUploadByUser && !wasSkipped)
+                if(!(Settings.settings.disableUserSkippingOnTop && Utils.isUserOnTop()) && Settings.settings.skipUploadByUser && !wasSkipped)
                 {
                     wasSkipped = _this.skipUploadByUser();
                 }
