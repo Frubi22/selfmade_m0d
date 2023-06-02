@@ -1320,17 +1320,17 @@ class Keypress
             {
                 this.pr0gramm.navigateTo("inbox/all",0);
             }
-            else if(e.key == "1")
+            else if(e.key == "")
             {
                 e.preventDefault();
                 this.pr0gramm.navigateTo("new",0);
             }
-            else if(e.key == "2")
+            else if(e.key == "")
             {
                 e.preventDefault();
                 this.pr0gramm.navigateTo("top",0);
             }
-            else if(e.key == "3")
+            else if(e.key == "")
             {
                 e.preventDefault();
                 this.pr0gramm.navigateTo("stalk",0);
