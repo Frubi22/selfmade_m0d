@@ -1,3 +1,6 @@
+# Nyunyun-Edit
+- Das Script wurde von Frubi komplett vernachlässigt, also ja..
+
 # Selfmade M0d
 - Blockiere Posts anhand der Tags, des Uploaders, anhand der Wertung oder des Ranges des Uploaders.
 - Blockiere Kommentare anhand der Wörter, des Uploaders oder der Wertung.
@@ -7,12 +10,11 @@
 - Aktiviere und Deaktiviere das Addon ganz einfach über einen Filter Eintrag oder über ein Shortcut.
 
 ## Installation
-- [Installiere Tampermonkey(empfohlen)](https://tampermonkey.net)
+- [Installiere [Violentmonkey](https://addons.mozilla.org/en-US/firefox/addon/violentmonkey/) 
 - Installiere die aktuellste version des Scripts
 
-  [github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js](https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js)
+  [github.com/Nyunyun/selfmade_m0d/raw/master/dist/bundle.user.js](https://github.com/Frubi22/selfmade_m0d/raw/master/dist/bundle.user.js)
   
-  oder [greasyfork.org/de/scripts/35129-selfmade-m0d](https://greasyfork.org/de/scripts/35129-selfmade-m0d)
 ## Screenshots
 ![a](https://imgur.com/NrkuZN1.png)
 ![b](https://imgur.com/fEYUOYG.png)
